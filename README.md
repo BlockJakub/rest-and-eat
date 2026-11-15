@@ -59,10 +59,10 @@ rest-and-eat/
 |   |-- jidlo1.jpg
 |   |-- jidlo2.jpg
 |   `-- jidlo3.jpg
-`-- NOTES/
+`-- Notes/
     `-- project-workflow.md
 
-The NOTES directory is the proposed documentation addition.
+The Notes directory is the proposed documentation addition.
 
 Planned application pages:
 - login.html
@@ -104,7 +104,7 @@ Git workflow:
 1. Pull before editing when remote changes exist.
 2. Edit and save the required files.
 3. Test in SPCK Preview.
-4. Update NOTES/project-workflow.md.
+4. Update Notes/project-workflow.md.
 5. Stage and commit the complete change.
 6. Push to origin/main.
 7. Verify that GitHub contains the commit.
@@ -129,7 +129,7 @@ server-side system.
 
 The authoritative project tracker is:
 
-[Project Workflow](NOTES/project-workflow.md)
+[Project Workflow](Notes/project-workflow.md)
 
 It contains:
 - Implementation roadmap

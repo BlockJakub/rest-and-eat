@@ -1,6 +1,8 @@
 
 /**
- * Activates menu-card reveal and selection behaviours.
+ * Initializes Bento menu interactions.
+ *
+ * Sets up accessible card selection and scroll reveal.
  *
  * @returns {void} Nothing.
  */
@@ -14,8 +16,9 @@ export function initMenuAnimations() {
 }
 
 /**
- * Creates accessible buttons for highlighting dishes.
- * Buttons exist only when JavaScript is available.
+ * Adds accessible highlight buttons to menu cards.
+ *
+ * Buttons are created only when JavaScript runs.
  *
  * @param {NodeListOf<Element>} cards - Menu cards.
  * @returns {void} Nothing.
@@ -31,21 +34,24 @@ function initCardSelection(cards) {
 
     button.type = 'button';
     button.className = 'menu-card__action';
+    button.textContent = 'Highlight dish';
+
     button.setAttribute('aria-pressed', 'false');
     button.setAttribute(
       'aria-label',
-      `Highlight ${title.textContent.trim()}`
+      `Highlight dish: ${title.textContent.trim()}`
     );
-    button.textContent = 'Highlight dish';
 
     button.addEventListener('click', handleCardSelection);
+
     content.append(button);
   }
 }
 
 /**
- * Handles selecting or deselecting a menu card.
- * Only one card may be highlighted at a time.
+ * Toggles the selected menu card.
+ *
+ * Ensures only one card is highlighted at a time.
  *
  * @param {MouseEvent} event - Button click event.
  * @returns {void} Nothing.
@@ -61,7 +67,7 @@ function handleCardSelection(event) {
     'menu-card--selected'
   );
 
-  // Reset previous selections before choosing a new card.
+  // Reset existing selections before applying a new one.
   for (const otherCard of grid.querySelectorAll('.menu-card')) {
     setCardSelection(otherCard, false);
   }
@@ -71,11 +77,15 @@ function handleCardSelection(event) {
   }
 }
 
+
 /**
- * Synchronizes a card's appearance and button state.
+ * Updates a menu card's visual and accessible state.
  *
- * @param {Element} card - Card to update.
- * @param {boolean} selected - Whether the card is selected.
+ * Keeps the button label stable while aria-pressed
+ * communicates its selected or unselected state.
+ *
+ * @param {Element} card - Menu card to update.
+ * @param {boolean} selected - Desired selection state.
  * @returns {void} Nothing.
  */
 function setCardSelection(card, selected) {
@@ -86,29 +96,25 @@ function setCardSelection(card, selected) {
   card.classList.toggle('menu-card--selected', selected);
 
   button.setAttribute('aria-pressed', String(selected));
-  button.textContent = selected
-    ? 'Highlighted'
-    : 'Highlight dish';
 }
 
+
 /**
- * Reveals menu cards when they enter the viewport.
+ * Initializes reveal animations for visible menu cards.
  *
- * Uses IntersectionObserver instead of continuous
- * scroll events to avoid unnecessary calculations.
+ * Uses IntersectionObserver to avoid continuous
+ * scroll-position calculations.
  *
- * @param {NodeListOf<Element>} cards - Cards to observe.
+ * @param {NodeListOf<Element>} cards - Menu cards.
  * @returns {void} Nothing.
  */
 function initScrollReveal(cards) {
-  const prefersReducedMotion = window.matchMedia(
+  const reducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   ).matches;
 
-  // Preserve visible content when motion is reduced
-  // or the browser does not support IntersectionObserver.
   if (
-    prefersReducedMotion ||
+    reducedMotion ||
     !('IntersectionObserver' in window)
   ) {
     return;
@@ -129,12 +135,12 @@ function initScrollReveal(cards) {
 }
 
 /**
- * Reveals visible cards and stops watching them.
+ * Reveals intersecting cards and stops observing them.
  *
  * @param {IntersectionObserverEntry[]} entries
- *   Visibility information for observed elements.
+ *   Observed visibility changes.
  * @param {IntersectionObserver} observer
- *   The active IntersectionObserver instance.
+ *   Observer responsible for the changes.
  * @returns {void} Nothing.
  */
 function handleCardReveal(entries, observer) {
@@ -145,7 +151,6 @@ function handleCardReveal(entries, observer) {
       'menu-card--reveal-pending'
     );
 
-    // Each card only needs to reveal once.
     observer.unobserve(entry.target);
   }
 }
