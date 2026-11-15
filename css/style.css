@@ -1,0 +1,203 @@
+
+/* Base and design tokens */
+:root {
+  --color-bg: #11100e;
+  --color-text: #f8f4eb;
+  --color-accent: #d9a85f;
+  --color-overlay: rgba(0, 0, 0, 0.58);
+
+  --font-main: Arial, sans-serif;
+  --header-height: 72px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: -100px;
+  left: 1rem;
+  padding: 1rem;
+  background: white;
+  color: black;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Header and navigation */
+.site-header {
+  position: absolute;
+  z-index: 10;
+  inset: 0 0 auto;
+}
+
+.nav {
+  min-height: var(--header-height);
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 0.12em;
+}
+
+.nav__logo-accent {
+  color: var(--color-accent);
+}
+
+.nav__toggle {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav__toggle-line {
+  width: 26px;
+  height: 2px;
+  background: white;
+}
+
+.nav__list {
+  display: none;
+  position: absolute;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 1.5rem;
+  list-style: none;
+  background: var(--color-bg);
+}
+
+.nav__list--open {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.nav__link {
+  text-decoration: none;
+}
+
+/* Full-bleed hero */
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  min-height: 100dvh;
+  padding: 7rem 1.5rem 4rem;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+}
+
+.hero__background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(var(--color-overlay),
+                    var(--color-overlay)),
+    url("../img/jidlo1.jpg")
+      center / cover no-repeat;
+}
+
+.hero__content {
+  max-width: 700px;
+}
+
+.hero__eyebrow {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+}
+
+.hero__title {
+  margin: 1.5rem 0;
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  line-height: 1.1;
+}
+
+.hero__title-accent {
+  display: block;
+  color: var(--color-accent);
+}
+
+.hero__description {
+  line-height: 1.7;
+  color: #e4dfd6;
+}
+
+.hero__cta {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background: var(--color-accent);
+  color: #11100e;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* Menu placeholder */
+.menu {
+  min-height: 60vh;
+  padding: 5rem 1.5rem;
+  text-align: center;
+}
+
+/* Larger screens */
+@media (min-width: 768px) {
+  .nav {
+    padding-inline: 3rem;
+  }
+
+  .nav__toggle {
+    display: none;
+  }
+
+  .nav__list {
+    position: static;
+    display: flex;
+    gap: 2rem;
+    padding: 0;
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

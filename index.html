@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+  <meta name="description"
+        content="Discover fresh ingredients and exceptional dining at SAVOUR Restaurant. Explore our menu.">
+
+  <title>SAVOUR | Modern Restaurant</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">
+    Skip to main content
+  </a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav__logo" href="index.html"
+         aria-label="SAVOUR Restaurant home">
+        SAVOUR<span class="nav__logo-accent">.</span>
+      </a>
+
+      <button class="nav__toggle"
+              type="button"
+              aria-label="Open navigation"
+              aria-controls="primary-menu"
+              aria-expanded="false">
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+      </button>
+
+      <ul class="nav__list" id="primary-menu">
+        <li><a class="nav__link" href="#menu">Menu</a></li>
+        <li><a class="nav__link" href="#about">About</a></li>
+        <li><a class="nav__link" href="#contact">Contact</a></li>
+        <li><a class="nav__link" href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Full-bleed Hero -->
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__background" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow">A TASTE TO REMEMBER</p>
+
+        <h1 class="hero__title" id="hero-title">
+          Experience
+          <span class="hero__title-accent">Extraordinary</span>
+          Flavours
+        </h1>
+
+        <p class="hero__description">
+          Fresh ingredients. Bold flavours.
+          Unforgettable moments.
+        </p>
+
+        <a class="hero__cta" href="#menu">
+          Explore Our Menu
+        </a>
+      </div>
+    </section>
+
+    <!-- Bento menu will be added next -->
+    <section id="menu" class="menu"
+             aria-labelledby="menu-title">
+      <h2 id="menu-title">Discover Our Menu</h2>
+    </section>
+  </main>
+</body>
+</html>
