@@ -11,8 +11,8 @@ Stack: HTML5 / BEM CSS / Vanilla JavaScript
 Backend: None  
 Last audit: 2026-11-15  
 
-Last inspected Git commit:
-bdba58a1b4da767edb6cfca5b9c49baba3361ea7
+Last inspected code/documentation baseline commit:
+21bf1605660b812fec2cda5354fc785c33246d37
 
 This document is the authoritative source for
 development progress, testing and next actions.
@@ -268,13 +268,15 @@ Content polish.
 
 ### ISSUE-004 — CARD BUTTON ACCESSIBLE NAME
 
-The highlight button changes visible text and
-aria-pressed, but its aria-label does not change.
+The highlight button now keeps a stable accessible
+label while aria-pressed communicates its state.
+The code change exists on GitHub but keyboard and
+screen-reader verification has not been reported.
 
-Status: OPEN
+Status: IMPLEMENTED — QA PENDING
 
 Action:
-Correct and verify accessible naming.
+Run keyboard and screen-reader checks before closing.
 
 ### ISSUE-005 — REPOSITORY VISIBILITY
 
@@ -407,8 +409,9 @@ Actions:
 - Documented open issues and remaining phases
 
 Status:
-Documentation update prepared.
-Git commit and SPCK synchronization pending.
+README and Notes tracker were subsequently committed
+and pushed by the project owner.
+The current Notes/ folder is part of the repository.
 
 
 
@@ -451,6 +454,29 @@ Next:
 4. Commit and push the work batch.
 5. Begin Phase 3 after verification.
 
+### 2026-11-15 — Mobile Documentation Ownership
+
+Verified remote baseline:
+21bf160 — update Notes/ and animations.js
+
+Documentation handoff:
+- Owner asked the assistant to maintain README and project workflow directly on GitHub.
+- Owner continues editing and testing code in SPCK Editor.
+- Assistant records confirmed changes and test results after each pushed batch.
+- README and Notes are not manually edited on the phone as part of normal development.
+- Any assistant-side documentation commit requires a subsequent clean Pull in SPCK.
+- No automatic background monitoring is configured.
+
+Code findings:
+- js/animations.js uses a stable button label and aria-pressed for selection state.
+- This is IMPLEMENTED, but accessibility QA remains PENDING.
+- Phase 2B remains IMPLEMENTED, not VERIFIED.
+
+Next:
+1. Pull the documentation commit into SPCK.
+2. Perform Phase 2B acceptance testing.
+3. Report results, then proceed to Phase 3 only after verification.
+
 ## 8. Required development workflow
 
 ### Before each work session
@@ -470,18 +496,22 @@ Next:
 4. Test after changes.
 5. Record failures or unresolved issues.
 
-### After implementation
+### After implementation — mobile collaboration
 
-1. Record changed files.
-2. Record what was implemented.
-3. Record actual test results.
-4. Update the task status honestly.
-5. Record remaining dependencies.
-6. Stage and commit code with the workflow update.
-7. Push to GitHub.
-8. Verify the remote commit exists.
+1. Owner tests code in SPCK Preview and records results in chat.
+2. Owner stages, commits and pushes code to origin/main.
+3. Owner tells the assistant "Pushed" and supplies any test results or failures.
+4. Assistant fetches actual remote code, HEAD and current documentation.
+5. Assistant updates implementation status, test evidence, open issues, decisions and next dependency directly in this tracker.
+6. Assistant updates README only when technical project information changes.
+7. Assistant creates GitHub documentation commit(s) and verifies them.
+8. Assistant tells owner which remote commits were created.
+9. Owner Pulls into SPCK with a clean working tree BEFORE starting the next code batch.
 
 Never mark code VERIFIED merely because it was pushed.
+Do not Pull with uncommitted local changes; commit/push or resolve them first.
+Never Force Push, reset, or delete local work to synchronize.
+Documentation maintenance happens during active chat, not unattended in the background.
 
 ## 9. Next authorized development target
 
@@ -491,9 +521,10 @@ Dependency order:
 
 1. Test existing animations in SPCK.
 2. Fix confirmed interaction/accessibility issues.
-3. Update QA results in this document.
-4. Commit and push verified changes.
-5. Begin Phase 3 — Hero Parallax.
+3. Owner commits and pushes code after testing.
+4. Assistant updates QA results and remaining work directly on GitHub.
+5. Owner pulls the documentation changes into SPCK.
+6. Begin Phase 3 — Hero Parallax after required checks pass.
 
 Do not silently skip unfinished acceptance tests.
 
@@ -509,3 +540,13 @@ A development phase can be marked VERIFIED only when:
 - The user has confirmed applicable SPCK tests.
 
 Git history and workflow documentation must agree.
+
+## 11. Documentation ownership and synchronization
+
+- README.md: technical overview, architecture, project constraints and setup.
+- Notes/project-workflow.md: authoritative tasks, statuses, QA evidence, decisions, blockers and work-session log.
+- SPCK owner: edits code, performs mobile tests, commits and pushes code.
+- Assistant: reviews the pushed remote state and updates both documents directly on GitHub, preserving unfinished tasks and test truthfulness.
+- If GitHub write access is unavailable, the assistant reports the failure instead of claiming an update happened.
+- After a documentation-only remote commit, the owner must Pull before the next work batch. Never overwrite uncommitted local work.
+- Automated background surveillance is not enabled; updates are performed during the active conversation.
