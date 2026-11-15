@@ -171,11 +171,141 @@ button {
 }
 
 /* Menu placeholder */
+
+/* ========================================
+   Restaurant Bento Menu
+   Mobile-first layout
+======================================== */
+
 .menu {
-  min-height: 60vh;
-  padding: 5rem 1.5rem;
+  padding: clamp(4rem, 8vw, 7rem) 1.25rem;
+  background: var(--color-bg);
+}
+
+.menu__container {
+  width: min(100%, 1200px);
+  margin-inline: auto;
+}
+
+.menu__header {
+  max-width: 650px;
+  margin: 0 auto 3rem;
   text-align: center;
 }
+
+.menu__eyebrow {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.menu__title {
+  margin: 1rem 0;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1.15;
+}
+
+.menu__description {
+  color: #bdb7ac;
+  line-height: 1.7;
+}
+
+/* Base grid: one column on small phones */
+.menu__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+/* Individual food cards */
+.menu-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #39332c;
+  border-radius: 1rem;
+  background: #211d19;
+}
+
+.menu-card__media {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.menu-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-card__content {
+  padding: 1.25rem;
+}
+
+.menu-card__category {
+  margin: 0 0 0.75rem;
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.menu-card__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.menu-card__title {
+  margin: 0;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+}
+
+.menu-card__price {
+  color: var(--color-accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.menu-card__description {
+  margin: 0.75rem 0 0;
+  color: #c7beb0;
+  line-height: 1.6;
+}
+
+/* Two-column bento layout */
+@media (min-width: 600px) {
+  .menu__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .menu-card--featured {
+    grid-column: span 2;
+  }
+
+  .menu-card--featured .menu-card__media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Desktop bento layout */
+@media (min-width: 1024px) {
+  .menu__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .menu-card--featured {
+    grid-column: span 2;
+  }
+
+  .menu-card--featured .menu-card__media {
+    aspect-ratio: 4 / 3;
+  }
+}
+
 
 /* Larger screens */
 @media (min-width: 768px) {
