@@ -1,6 +1,6 @@
-# SAVOUR Restaurant — Project Master Plan
+#  Rest And Eat Restaurant — Project Master Plan
 
-**Project:** SAVOUR Restaurant  
+**Project:** REST AND EAT Restaurant  
 **Type:** Mobile-first, responsive restaurant website + frontend-only account demonstration  
 **Editor:** SPCK Editor (Android)  
 **Stack:** Semantic HTML5, CSS3 (BEM), vanilla JavaScript (ES modules)  
