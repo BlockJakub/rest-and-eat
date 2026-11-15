@@ -62,7 +62,7 @@ rest-and-eat/
 `-- Notes/
     `-- project-workflow.md
 
-The Notes directory is the proposed documentation addition.
+The Notes directory is tracked in the repository. Documentation is maintained directly on GitHub by the project assistant after each completed code batch.
 
 Planned application pages:
 - login.html
@@ -100,14 +100,16 @@ Open the project in SPCK Editor and use Preview.
 Development follows a mobile-first approach.
 All changes must be tested before being marked VERIFIED.
 
-Git workflow:
-1. Pull before editing when remote changes exist.
-2. Edit and save the required files.
-3. Test in SPCK Preview.
-4. Update Notes/project-workflow.md.
-5. Stage and commit the complete change.
-6. Push to origin/main.
-7. Verify that GitHub contains the commit.
+Git workflow (SPCK mobile + GitHub documentation):
+1. Before coding, Pull when remote changes exist and the local working tree is clean.
+2. Edit and save code in SPCK Editor.
+3. Test in SPCK Preview and report actual results.
+4. Stage, commit and Push code to origin/main.
+5. Tell the assistant "Pushed" (include test results or problems).
+6. The assistant reviews current remote code and commits, then edits README.md and Notes/project-workflow.md directly on GitHub, recording implementation, QA status and next steps.
+7. After the assistant confirms the documentation commit, Pull in SPCK before making more changes.
+
+Do not Pull into a dirty working tree without resolving local changes first. Never Force Push or discard local work to sync. The assistant's documentation updates occur during an active conversation, not as automatic background monitoring.
 
 Never use Force Push as part of the normal workflow.
 
@@ -152,7 +154,7 @@ document explains the development state and decisions.
 - Respect reduced-motion preferences.
 - Optimize images and responsive layouts.
 - Never mark untested work as VERIFIED.
-- Update workflow documentation with every work batch.
+- The assistant maintains workflow documentation on GitHub after each pushed work batch; the SPCK developer Pulls the documentation commit before the next coding batch.
 
 ## Ownership
 
