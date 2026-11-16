@@ -9,9 +9,11 @@ semantic HTML5, BEM CSS and vanilla JavaScript.
 - Repository: BlockJakub/rest-and-eat
 - Development editor: SPCK Editor (Android)
 - Development branch: main
-- Project type: Static frontend demonstration
-- Backend: None
-- Status: Active development
+- Current implementation: Static frontend demonstration
+- Current backend: None (no real login/order processing yet)
+- Proposed target: Real secure JavaScript-based authentication and restaurant ordering
+- Architecture proposal: Notes/auth-and-order-system-plan.md (owner/hosting approval pending)
+- Status: Active development; backend architecture not finalized
 
 Branding is **REST & EAT** for the logo, headlines and display identity,
 and **Rest & Eat** for document titles, metadata and natural prose.
@@ -80,12 +82,21 @@ rest-and-eat/
 
 The Notes directory is tracked in the repository. Documentation is maintained directly on GitHub by the project assistant after each completed code batch.
 
-Planned application pages:
+Planned real customer application pages:
 - login.html
 - register.html
+- forgot-password.html
+- reset-password.html
 - dashboard.html
 
-These pages do not exist yet.
+These pages do not exist yet. No real authentication, sessions or orders
+are currently implemented. Future account pages require a trusted server,
+not localStorage-based login simulation.
+
+Architecture/requirements proposal: Notes/auth-and-order-system-plan.md.
+The previous frontend-only demo login proposal has been superseded by the
+owner's request for real, reusable auth and food ordering. Hosting, DB and
+order-delivery decisions require AUTH-00 approval before implementation.
 
 ## Architecture
 
