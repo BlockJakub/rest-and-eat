@@ -12,7 +12,7 @@ Backend: None
 Last audit: 2026-11-16  
 
 Last inspected code/documentation baseline commit:
-1c7c22577ca5cb60530679f007d29b2f1ed48cd8
+6fc93c83f4b9748701ce31f9007d9d277d7380da
 
 This document is the authoritative source for
 development progress, testing and next actions.
@@ -45,19 +45,20 @@ Work cannot continue until a dependency is resolved.
 | Phase 2B — Menu Animations | IMPLEMENTED — MOBILE QA PASSED; DESKTOP QA DEFERRED |
 | Phase 3 — Hero Parallax | IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING |
 | Phase 4 — Featured Dish Promotion | PHASE 4A+4B IMPLEMENTED — MOBILE QA 5/5 PASS; ADVANCED QA PENDING |
-| Phase 5 — Story, Conclusion, Footer | PHASE 5A IMPLEMENTED — MOBILE QA 5/5 PASS; PHASE 5B NEXT |
-| Phase 6 — Demo Accounts and Dashboard | TODO |
+| Phase 5 — Story, Conclusion, Footer | PHASE 5A+5B IMPLEMENTED — MOBILE QA 5/5 PASS EACH; ADVANCED QA PENDING |
+| Phase 6 — Demo Accounts and Dashboard | NEXT — PHASE 6A READY FOR IMPLEMENTATION |
 | Phase 7 — Final QA and Release | TODO |
 
-**Current active phase:** PHASE 5B — CONCLUSION, CONTACT AND FOOTER (NEXT)
+**Current active phase:** PHASE 6A — FRONTEND DEMO ACCOUNTS (NEXT)
 
 **Next dependency:**
-Phase 5A code commit 1c7c225 is confirmed on GitHub main: semantic Restaurant
-Story section, #about anchor and responsive CSS. Owner-reported SPCK Android
-Phase 5A functional QA: 5/5 groups PASS. Source review does not substitute
-for wider desktop/accessibility tests; previous advanced QA remains OPEN.
-Proceed to Phase 5B conclusion, functional #contact anchor and semantic footer
-after pulling the new documentation commits into a clean SPCK working tree.
+Phase 5B code commit 6fc93c8 is confirmed on GitHub main: closing section,
+working #contact target and semantic footer with responsive styling.
+Owner-reported Phase 5B SPCK Mobile QA: 5/5 PASS (Contact Navigation included).
+The site remains a frontend concept: contact and reservations are not live.
+Phase 6A frontend-only account demonstration is NEXT after owner pulls docs.
+All unperformed advanced desktop/accessibility/reduced-motion/performance
+and browser console checks remain OPEN and block production release.
 
 ## 4. Implementation roadmap
 
@@ -233,7 +234,7 @@ reduced-motion and performance checks are not yet evidenced.
 
 ### PHASE 5 — Story, Conclusion and Footer
 
-**Status: PHASE 5A IMPLEMENTED — MOBILE QA 5/5 PASS; PHASE 5B NEXT**
+**Status: PHASE 5A AND 5B IMPLEMENTED — MOBILE FUNCTIONAL QA PASSED; ADVANCED QA PENDING**
 
 Phase 5A — restaurant story:
 - [x] Create semantic About / Restaurant Story section and #about anchor
@@ -259,16 +260,32 @@ Evidence:
 - Phase 5A is NOT fully production VERIFIED.
 
 Phase 5B — conclusion, contact and footer:
-- [ ] Create conclusion section and honest demo reservation CTA (no fake bookings)
-- [ ] Implement #contact destination with non-fabricated demo contact information
-- [ ] Create semantic footer and review internal navigation
-- [ ] Add opening hours only when supplied/approved, otherwise use clear demo placeholders
-- [ ] Review links, focus, headings and responsive layout
-- [ ] Test in SPCK, commit/push and record QA before Phase 6
+- [x] Implement semantic Closing section with #menu and #contact CTA links
+- [x] Add Contact section with id=contact and matching heading reference
+- [x] Clearly disclose that real contact, opening hours and reservations are unavailable
+- [x] Add semantic footer outside main with REST & EAT identity and accessible navigation
+- [x] Implement mobile-first Contact and Footer responsive CSS
+- [x] Owner-reported SPCK mobile QA: Conclusion & Reservation Information — PASS
+- [x] Owner-reported SPCK mobile QA: Contact Navigation — PASS
+- [x] Owner-reported SPCK mobile QA: Footer Links — PASS
+- [x] Owner-reported SPCK mobile QA: Portrait / Landscape — PASS
+- [x] Owner-reported SPCK mobile QA: Regression — PASS
+- [ ] Complete advanced browser/keyboard/assistive technology/contrast QA before release
+
+Phase 5B GitHub and test evidence:
+- Code commit: 6fc93c83f4b9748701ce31f9007d9d277d7380da
+- Message: conclusion section and footer
+- Files changed: index.html, css/style.css
+- Confirmed presence of .closing, #contact and <footer class="site-footer"> on main.
+- Source review confirms Contact navigation destination; interaction PASS is owner-reported.
+- Source includes an external Jacuba Visuals Web credit link, added by owner;
+  external link destination and any disclosure preference are not QA-verified.
+- SPCK Android functional groups: 5/5 PASS; Notes: None.
+- Advanced QA not run; do not mark Phase 5 fully VERIFIED or production-ready.
 
 ### PHASE 6 — Frontend Account Demonstration
 
-**Status: TODO**
+**Status: NEXT — PHASE 6A READY FOR IMPLEMENTATION**
 
 Tasks:
 
@@ -341,17 +358,21 @@ No automated desktop checks or trademark clearance are implied by closure.
 
 Resolved in Phase 5A:
 - #about now targets the semantic Restaurant Story section.
-- Owner-reported Android navigation test: PASS.
-- Source review confirms the destination exists in index.html.
+- Owner-reported SPCK Android navigation: PASS.
+
+Resolved in Phase 5B:
+- #contact now targets the Contact section in index.html.
+- Source review confirms the destination exists.
+- Owner-reported SPCK Android Contact Navigation: PASS.
 
 Still unresolved:
-- #contact: Phase 5B planned.
-- login.html: Phase 6 frontend demonstration planned.
+- login.html does not exist; current Header Login link remains broken until Phase 6.
 
-Status: PARTIALLY RESOLVED — #contact AND login.html STILL OPEN
+Status: PARTIALLY RESOLVED — ONLY login.html REMAINS OPEN
 
 Planned resolution:
-Phases 5B and 6. Do not close this issue until both remaining targets work.
+Phase 6 frontend demonstration. Do not close ISSUE-002 before its destination exists
+and relevant navigation QA is performed.
 
 ### ISSUE-003 — DEMONSTRATION MENU CONTENT
 
@@ -454,6 +475,22 @@ Status: OPEN — ADVANCED QA NOT TESTED
 Action:
 Inspect the photograph and confirm accurate alternative text; verify
 dimensions and cross-device accessibility before production release.
+
+### ISSUE-011 — PHASE 5B ADVANCED QA
+
+Closing section, Contact and Footer are implemented and owner-reported
+mobile functional groups passed 5/5. These checks were NOT performed:
+- Keyboard navigation and visible focus checks across footer/contact
+- Screen-reader landmark/heading and link announcement
+- Desktop and cross-browser layout/contrast testing
+- Browser console and network request review
+- External footer credit link validation and destination policy review
+
+Status: OPEN — ADVANCED QA UNTESTED
+
+Action:
+Complete and record each check before production release.
+Do not claim production-ready or VERIFIED based only on mobile passes.
 
 ## 6. Architecture decisions
 
@@ -846,6 +883,40 @@ Next:
 3. Owner tests, commits and pushes Phase 5B; assistant verifies before updating.
 4. Complete all advanced QA before release.
 
+### 2026-11-16 — Phase 5B GitHub Code and SPCK Mobile QA
+
+Code verification:
+- GitHub main commit 6fc93c83f4b9748701ce31f9007d9d277d7380da
+- Commit title: conclusion section and footer
+- Changed files: index.html and css/style.css
+- Closing section with on-page #menu and #contact destinations confirmed.
+- Semantic Contact section (id=contact), clear demo reservation disclosure
+  and footer with navigational links confirmed.
+- Responsive CSS for .closing, .contact and .site-footer confirmed.
+- Owner added external Jacuba Visuals Web footer credit.
+
+SPCK Android owner-reported QA:
+1. Conclusion & Reservation Information — PASS
+2. Contact Navigation — PASS (previously PENDING; now explicitly tested)
+3. Footer Links — PASS
+4. Portrait / Landscape — PASS
+5. Regression — PASS
+Notes: None.
+
+Assessment:
+- Code implementation CONFIRMED on main.
+- Functional mobile QA: 5/5 PASS.
+- Phase 5A and 5B implemented with mobile functional evidence.
+- #contact resolved; login.html remains missing until Phase 6.
+- ISSUE-011 OPEN for advanced verification; existing advanced QA OPEN.
+- No production release or full phase VERIFIED claim.
+
+Next:
+- Assistant updates README and workflow directly on GitHub.
+- Owner Pulls documentation commits with a clean SPCK working tree.
+- Begin Phase 6A frontend-only account demonstration with no real
+  authentication, passwords, backend, personal data or false security claims.
+
 ## 8. Required development workflow
 
 ### Before each work session
@@ -884,21 +955,22 @@ Documentation maintenance happens during active chat, not unattended in the back
 
 ## 9. Next authorized development target
 
-**NEXT: PHASE 5B CONCLUSION, CONTACT AND FOOTER**
+**NEXT: PHASE 6A FRONTEND ACCOUNT DEMONSTRATION**
 
 Dependency order:
 
-1. Phase 5A implementation: CONFIRMED on GitHub commit 1c7c225.
-2. Phase 5A mobile functional QA: PASS 5/5 owner-reported groups.
-3. Phase 2B/3/4/5A advanced QA remains OPEN before release.
-4. Owner Pulls assistant documentation changes into clean SPCK.
-5. Add a truthful conclusion and contact section with working #contact target.
-6. Add semantic footer, navigational links and demo-safe contact details.
-7. Keep reservations demonstrative; do not claim functional booking or
-   invent business phone, email, address, operating hours or credentials.
-8. Test responsive layout, contact navigation, links and previous features.
-9. Owner commits and pushes code; assistant verifies before recording results.
-10. Phase 6 frontend-only account demo follows successful Phase 5B tests.
+1. Phase 5B commit: CONFIRMED on GitHub 6fc93c8.
+2. Phase 5B SPCK Android functional QA: PASS 5/5 owner-reported groups.
+3. Phase 2B, 3, 4, 5A and 5B advanced QA remains OPEN before release.
+4. Owner Pulls new documentation commits into clean SPCK.
+5. Phase 6A implements safe static login/register/dashboard demonstration
+   routes and honest demo-only labels; login.html is the next missing target.
+6. Do not collect real credentials or personal data, save passwords,
+   pretend client-side redirects enforce authorization or add fake backend logic.
+7. Test new pages, links and responsive layouts in SPCK, then commit/push.
+8. Assistant verifies actual GitHub code before recording 6A test results.
+9. Complete Phase 6 subsequent frontend interaction batches and all Phase 7 QA
+   before considering release.
 
 Do not silently skip unfinished acceptance tests.
 
