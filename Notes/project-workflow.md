@@ -12,7 +12,7 @@ Backend: None
 Last audit: 2026-11-16  
 
 Last inspected code/documentation baseline commit:
-8e1da7c27b2b751621425a7df8bdad532d9db3bd
+d8163c9a01856082e56aeea0f1a669eca7920876
 
 This document is the authoritative source for
 development progress, testing and next actions.
@@ -44,21 +44,21 @@ Work cannot continue until a dependency is resolved.
 | Phase 2A — Responsive Bento Grid | VERIFIED |
 | Phase 2B — Menu Animations | IMPLEMENTED — MOBILE QA PASSED; DESKTOP QA DEFERRED |
 | Phase 3 — Hero Parallax | IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING |
-| Phase 4 — Featured Dish Promotion | PHASE 4A IMPLEMENTED; OWNER PREVIEW OK — PHASE 4B NEXT |
-| Phase 5 — Story, Conclusion, Footer | TODO |
+| Phase 4 — Featured Dish Promotion | PHASE 4A+4B IMPLEMENTED — MOBILE QA 5/5 PASS; ADVANCED QA PENDING |
+| Phase 5 — Story, Conclusion, Footer | NEXT — PHASE 5A READY FOR IMPLEMENTATION |
 | Phase 6 — Demo Accounts and Dashboard | TODO |
 | Phase 7 — Final QA and Release | TODO |
 
-**Current active phase:** PHASE 4B — INDEPENDENT FEATURED DISH PARALLAX (NEXT; BRANDING VISUAL QA FIRST)
+**Current active phase:** PHASE 5A — RESTAURANT STORY (NEXT)
 
 **Next dependency:**
-Phase 4A code commit 0e10f48 is confirmed on GitHub main, with the featured
-section and responsive CSS. Owner reported that the new section looks and works;
-a detailed per-test checklist has not yet been returned. Branding source changes
-were committed as 90220ce; verify REST & EAT visually in SPCK after Pull.
-Next development target: Phase 4B independent featured-dish parallax.
-All previously deferred desktop accessibility/performance checks remain OPEN
-and block production release.
+Phase 4B code commit d8163c9 is confirmed on GitHub main: shared
+initPageParallax() schedules Hero and Featured Dish effects.
+Owner-reported SPCK Android Phase 4B mobile QA: 5/5 functional groups PASS.
+REST & EAT branding display was previously confirmed after Pull.
+Advanced accessibility, reduced-motion emulation, measured performance,
+browser console and production release checks remain OPEN/UNTESTED.
+Proceed to Phase 5A Restaurant Story after Pull of the documentation commit.
 
 ## 4. Implementation roadmap
 
@@ -187,44 +187,69 @@ tests passed but advanced checks lack test evidence.
 
 ### PHASE 4 — Featured Dish Promotion
 
-**Status: PHASE 4A IMPLEMENTED — OWNER PREVIEW REPORTED OK; PHASE 4B NEXT**
+**Status: PHASE 4A + 4B IMPLEMENTED — MOBILE FUNCTIONAL QA PASSED; ADVANCED QA PENDING**
 
 Phase 4A — responsive static promotion:
 - [x] Add full-bleed promotional section below Bento menu
-- [x] Use existing img/jidlo2.jpg as a provisional decorative image
+- [x] Use existing img/jidlo2.jpg as provisional decorative photography
 - [x] Add matching demonstration dish name, description and price (£17.50)
-- [x] Add CTA linking to existing #menu anchor (source-level verification)
+- [x] Add CTA linking to the existing #menu anchor (source review)
 - [x] Implement semantic section with heading and background overlay CSS
 - [x] Implement mobile-first static layout and desktop breakpoint
-- [ ] Record detailed portrait/landscape, cropping, contrast, CTA and regression QA individually
+- [x] Owner confirmed basic layout and functionality in SPCK
+- [ ] Independently record detailed image crop and colour-contrast results
 
-Evidence:
-- GitHub commit: 0e10f483f05c5dcd9a628ac66f5c4654fbddb57d (Featured Dish Promotion)
-- Reviewed index.html and css/style.css on main.
-- Owner reported: "vse je ok to zatim vypada a funguje" (mobile SPCK observation).
-- No specific per-test PASS/FAIL measurements or screenshots were supplied for Phase 4A.
-- Do not claim Phase 4A is fully VERIFIED or production-ready yet.
+Phase 4A evidence:
+- GitHub code commit: 0e10f483f05c5dcd9a628ac66f5c4654fbddb57d
+- Owner report: featured section looks and works in SPCK, no problems raised.
+- Phase 4B mobile test results further cover portrait/landscape, CTA and regression,
+  but are not substitutes for measured contrast/desktop testing.
 
-Phase 4B — independent promotion motion:
-- [ ] Add independently controlled promotion parallax without duplicating Hero observers
-- [ ] Respect prefers-reduced-motion, avoid image gaps and unnecessary scroll work
-- [ ] Test motion, stability, link behaviour and Bento/Hero regression
+Phase 4B — shared scheduler, independent section movement:
+- [x] Refactor old initHeroParallax() into initPageParallax()
+- [x] Manage both sections with one passive scroll listener and one rAF scheduler
+- [x] Preserve independent per-section speeds and bounded translation
+- [x] Add ±64px featured translation and 80px background overflow coverage
+- [x] Implement reduced-motion preference guards and static CSS fallback
+- [ ] Verify actual reduced-motion preference in a browser/emulated environment
+- [ ] Verify desktop browser console and measured performance
+
+Phase 4B code evidence:
+- GitHub commit: d8163c9a01856082e56aeea0f1a669eca7920876
+- Commit message: featured dish parallax
+- Files changed: css/style.css, js/animations.js, js/main.js
+- Source reviewed and confirmed on main.
+
+Owner-reported Phase 4B SPCK Android QA (2026-11-16):
+- [x] Featured Dish Parallax — PASS
+- [x] Hero Parallax Regression — PASS
+- [x] Responsive Portrait / Landscape — PASS
+- [x] CTA & Bento Menu — PASS
+- [x] Smooth Scrolling — PASS (visual assessment, not instrumented FPS)
+- Notes: None
+
+Result: 5/5 owner-reported functional mobile groups PASS.
+The phase is NOT fully VERIFIED or production-ready. Advanced accessibility,
+reduced-motion and performance checks are not yet evidenced.
 
 ### PHASE 5 — Story, Conclusion and Footer
 
-**Status: TODO**
+**Status: NEXT — PHASE 5A READY FOR IMPLEMENTATION**
 
-Tasks:
+Phase 5A — restaurant story:
+- [ ] Create About / Restaurant Story section and meaningful #about destination
+- [ ] Use semantic heading structure and maintain REST & EAT branding
+- [ ] Build mobile-first responsive story layout with appropriately described images
+- [ ] Keep image/restaurant details explicitly demonstrative until confirmed
+- [ ] Test portrait, landscape, navigation and earlier animation regression
 
-- [ ] Create About / Restaurant Story
-- [ ] Create conclusion section
-- [ ] Create reservation CTA demonstration
-- [ ] Implement #about destination
-- [ ] Implement #contact destination
-- [ ] Create semantic footer
-- [ ] Add appropriate contact information
-- [ ] Add opening hours where appropriate
-- [ ] Review links and heading hierarchy
+Phase 5B — conclusion, contact and footer:
+- [ ] Create conclusion section and honest demo reservation CTA (no fake bookings)
+- [ ] Implement #contact destination with non-fabricated demo contact information
+- [ ] Create semantic footer and review internal navigation
+- [ ] Add opening hours only when supplied/approved, otherwise use clear demo placeholders
+- [ ] Review links, focus, headings and responsive layout
+- [ ] Test in SPCK, commit/push and record QA before Phase 6
 
 ### PHASE 6 — Frontend Account Demonstration
 
@@ -291,11 +316,11 @@ Source implementation:
 
 GitHub implementation commit: 90220ce3612be5fa045ec4d683d6058db83e6bce
 
-Status: IMPLEMENTED — MOBILE VISUAL QA PENDING
+Status: CLOSED — OWNER-REPORTED MOBILE VISUAL QA PASS
 
-Action:
-After Pull, check logo fits at narrow mobile widths, page title and menu eyebrow
-show the new name, and navigation still works. Close issue only after confirmation.
+Evidence:
+Owner confirmed after Pull that REST & EAT branding rendered correctly in SPCK.
+No automated desktop checks or trademark clearance are implied by closure.
 
 ### ISSUE-002 — INCOMPLETE NAVIGATION DESTINATIONS
 
@@ -367,6 +392,22 @@ Status: OPEN — MOBILE QA CHECKLIST PENDING
 Action:
 Confirm individual Phase 4A mobile tests before calling it VERIFIED;
 keep desktop release checks open independently.
+
+### ISSUE-009 — PHASE 4B ADVANCED QA
+
+Shared parallax architecture and five mobile functional groups confirmed.
+Required before release:
+- Actual prefers-reduced-motion testing of both moving backgrounds
+- Desktop/keyboard/accessibility regression and narrow viewport checks
+- Browser console error review
+- Measured performance and stability (mobile visual smoothness is not FPS data)
+- Cross-browser background coverage and contrast checks
+
+Status: OPEN — ADVANCED QA NOT TESTED
+
+Action:
+Record real QA evidence. Do not mark PASS based only on source review or
+mobile functional tests. This issue does not block Phase 5 development.
 
 ### ISSUE-007 — HERO PARALLAX ADVANCED QA
 
@@ -698,6 +739,43 @@ Next:
 4. Keep Phase 2B/Phase 3 advanced QA and Phase 4A detailed QA open.
 5. No release approval is implied by successful GitHub Push.
 
+### 2026-11-16 — Phase 4B Code Verification and Mobile QA
+
+GitHub commit:
+- d8163c9a01856082e56aeea0f1a669eca7920876
+- Commit title: featured dish parallax
+- Files: js/animations.js, js/main.js, css/style.css
+- Verified remote implementation of initPageParallax(), which schedules
+  both Hero and featured-background effects with one scroll listener.
+- Independent speeds/clamps and reduced-motion handling are present in source.
+
+Owner-reported SPCK Android QA:
+1. Featured Dish Parallax — PASS
+2. Hero Parallax Regression — PASS
+3. Responsive Portrait / Landscape — PASS
+4. CTA & Bento Menu — PASS
+5. Smooth Scrolling — PASS
+Notes: None.
+
+Evidence limits:
+- No video/frame-rate measurement or independent browser test was supplied.
+- Actual reduced-motion emulation, desktop console, keyboard/screen reader
+  and cross-browser checks have NOT been performed as part of this batch.
+- Results are owner-reported, not independent automated test output.
+
+Assessment:
+- Phase 4A + 4B code is CONFIRMED on GitHub.
+- Mobile functional QA: 5/5 groups PASS.
+- Phase 4 remains IMPLEMENTED / MOBILE QA PASSED / ADVANCED QA PENDING.
+- ISSUE-009 opened for advanced Phase 4 verification.
+- Branding ISSUE-001 closed after prior owner mobile confirmation.
+
+Next work:
+- Phase 5A — Restaurant Story and #about anchor.
+- Follow with Phase 5B conclusion, #contact and semantic footer.
+- Before editing code again, owner Pulls assistant-created documentation commits
+  into a clean SPCK working tree.
+
 ## 8. Required development workflow
 
 ### Before each work session
@@ -736,19 +814,20 @@ Documentation maintenance happens during active chat, not unattended in the back
 
 ## 9. Next authorized development target
 
-**NEXT: BRANDING MOBILE CHECK, THEN PHASE 4B PROMO PARALLAX**
+**NEXT: PHASE 5A RESTAURANT STORY**
 
 Dependency order:
 
-1. Phase 4A implementation: CONFIRMED on GitHub 0e10f48.
-2. Phase 4A owner observation: looks/works in SPCK; detailed QA not recorded.
-3. REST & EAT branding change: COMMITTED on GitHub 90220ce; visual QA PENDING.
-4. Owner Pulls remote branding/documentation commits into clean SPCK.
-5. Confirm mobile logo layout, title/description, menu eyebrow, and navigation.
-6. Complete/record the Phase 4A detailed mobile QA checks.
-7. Implement Phase 4B independent feature-background parallax in a new code batch.
-8. Owner commits and pushes Phase 4B code; assistant reviews and records outcomes.
-9. Phase 2B, Phase 3 and Phase 4 advanced release QA remain OPEN.
+1. Phase 4B implementation: CONFIRMED on GitHub d8163c9.
+2. Phase 4B mobile functional QA: PASS (5/5 owner-reported groups).
+3. Phase 2B / Phase 3 / Phase 4 advanced QA remains OPEN before release.
+4. Owner Pulls new assistant documentation commits into clean SPCK.
+5. Implement REST & EAT restaurant story with working #about anchor;
+   use explicit demo content, avoid invented restaurant facts.
+6. Test portrait/landscape, About navigation, CTA and prior animations.
+7. Owner commits/pushes Phase 5A code; assistant verifies GitHub and updates tracker.
+8. Follow with Phase 5B conclusion, #contact and footer.
+9. No production release until advanced QA and all broken links are resolved.
 
 Do not silently skip unfinished acceptance tests.
 
