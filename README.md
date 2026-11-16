@@ -1,5 +1,5 @@
 
-# REST AND EAT — Restaurant Website
+# REST & EAT — Restaurant Website
 
 Mobile-first, responsive restaurant frontend built with
 semantic HTML5, BEM CSS and vanilla JavaScript.
@@ -13,9 +13,10 @@ semantic HTML5, BEM CSS and vanilla JavaScript.
 - Backend: None
 - Status: Active development
 
-The repository is named REST AND EAT. The current website
-still displays the temporary SAVOUR brand. Final branding
-has not yet been approved.
+Branding is **REST & EAT** for the logo, headlines and display identity,
+and **Rest & Eat** for document titles, metadata and natural prose.
+The GitHub repository name remains `rest-and-eat` for technical URLs.
+The brand change is committed; the owner still needs to verify its mobile layout.
 
 ## Technology stack
 
@@ -41,8 +42,14 @@ No JavaScript or CSS framework is currently required.
 - Menu-card highlight interaction
 - Reduced-motion CSS support
 - requestAnimationFrame and passive scroll scheduling for Hero Parallax
+- Featured Dish Promotion (Phase 4A) with responsive image, demonstration price and menu CTA
+- Updated REST & EAT branding in the home page title, meta description, navigation and menu eyebrow
 
-Phase 2B menu animations and Phase 3 Hero Parallax have passed their owner-reported Android functional QA. Advanced accessibility, reduced-motion and performance verification remains pending; see the authoritative workflow tracker.
+Phase 2B menu animations and Phase 3 Hero Parallax have passed owner-reported Android functional QA.
+The Phase 4A promotion is implemented and the owner reports that it looks and works in SPCK;
+specific responsive, contrast and regression checks have not yet been reported separately.
+The REST & EAT branding update is committed, but visual verification after Pull is pending.
+Advanced accessibility, reduced-motion and performance QA remains open; see the workflow tracker.
 
 ## Project structure
 
@@ -91,6 +98,7 @@ style.css:
 - Base styles and design tokens
 - Header, hero and parallax background coverage
 - Bento Grid
+- Featured-dish promotion layout and overlay
 - Animation states
 - Responsive media queries
 
