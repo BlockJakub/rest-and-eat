@@ -1,9 +1,9 @@
 
-# REST AND EAT — MASTER PROJECT WORKFLOW
+# REST & EAT — MASTER PROJECT WORKFLOW
 
 ## 1. Project control
 
-Project: REST AND EAT Restaurant Website  
+Project: REST & EAT Restaurant Website  
 Repository: BlockJakub/rest-and-eat  
 Branch: main  
 Editor: SPCK Editor (Android)  
@@ -44,20 +44,21 @@ Work cannot continue until a dependency is resolved.
 | Phase 2A — Responsive Bento Grid | VERIFIED |
 | Phase 2B — Menu Animations | IMPLEMENTED — MOBILE QA PASSED; DESKTOP QA DEFERRED |
 | Phase 3 — Hero Parallax | IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING |
-| Phase 4 — Featured Dish Promotion | NEXT — READY FOR PHASE 4A |
+| Phase 4 — Featured Dish Promotion | PHASE 4A IMPLEMENTED; OWNER PREVIEW OK — PHASE 4B NEXT |
 | Phase 5 — Story, Conclusion, Footer | TODO |
 | Phase 6 — Demo Accounts and Dashboard | TODO |
 | Phase 7 — Final QA and Release | TODO |
 
-**Current active phase:** PHASE 4A — FEATURED DISH PROMOTION LAYOUT (NEXT)
+**Current active phase:** PHASE 4B — INDEPENDENT FEATURED DISH PARALLAX (NEXT; BRANDING VISUAL QA FIRST)
 
 **Next dependency:**
-Phase 3 code commit 8e1da7c has been confirmed on GitHub main.
-Owner-reported SPCK Android mobile QA: 5/5 functional groups PASS on 2026-11-16.
-Phase 3 advanced performance/accessibility/reduced-motion checks remain PENDING,
-and Phase 2B deferred desktop QA remains OPEN. No production release is approved.
-Next implementation: Phase 4A featured-dish responsive promotion layout using
-existing local assets before adding independent parallax in Phase 4B.
+Phase 4A code commit 0e10f48 is confirmed on GitHub main, with the featured
+section and responsive CSS. Owner reported that the new section looks and works;
+a detailed per-test checklist has not yet been returned. Branding source changes
+were committed as 90220ce; verify REST & EAT visually in SPCK after Pull.
+Next development target: Phase 4B independent featured-dish parallax.
+All previously deferred desktop accessibility/performance checks remain OPEN
+and block production release.
 
 ## 4. Implementation roadmap
 
@@ -186,18 +187,26 @@ tests passed but advanced checks lack test evidence.
 
 ### PHASE 4 — Featured Dish Promotion
 
-**Status: NEXT — READY FOR PHASE 4A**
+**Status: PHASE 4A IMPLEMENTED — OWNER PREVIEW REPORTED OK; PHASE 4B NEXT**
 
 Phase 4A — responsive static promotion:
-- [ ] Add full-bleed promotional section below Bento menu
-- [ ] Use an existing repository image as provisional content (avoid new assets)
-- [ ] Add matching demonstration dish title, description and price
-- [ ] Add meaningful CTA leading to the existing #menu anchor
-- [ ] Preserve semantic HTML and readable overlay contrast
-- [ ] Test portrait/landscape and responsive cropping in SPCK
+- [x] Add full-bleed promotional section below Bento menu
+- [x] Use existing img/jidlo2.jpg as a provisional decorative image
+- [x] Add matching demonstration dish name, description and price (£17.50)
+- [x] Add CTA linking to existing #menu anchor (source-level verification)
+- [x] Implement semantic section with heading and background overlay CSS
+- [x] Implement mobile-first static layout and desktop breakpoint
+- [ ] Record detailed portrait/landscape, cropping, contrast, CTA and regression QA individually
+
+Evidence:
+- GitHub commit: 0e10f483f05c5dcd9a628ac66f5c4654fbddb57d (Featured Dish Promotion)
+- Reviewed index.html and css/style.css on main.
+- Owner reported: "vse je ok to zatim vypada a funguje" (mobile SPCK observation).
+- No specific per-test PASS/FAIL measurements or screenshots were supplied for Phase 4A.
+- Do not claim Phase 4A is fully VERIFIED or production-ready yet.
 
 Phase 4B — independent promotion motion:
-- [ ] Add separately controlled promotion parallax without duplicating Hero observers
+- [ ] Add independently controlled promotion parallax without duplicating Hero observers
 - [ ] Respect prefers-reduced-motion, avoid image gaps and unnecessary scroll work
 - [ ] Test motion, stability, link behaviour and Bento/Hero regression
 
@@ -268,14 +277,25 @@ Tasks:
 
 ## 5. Known issues and risks
 
-### ISSUE-001 — OUTDATED BRANDING
+### ISSUE-001 — BRANDING CONSISTENCY
 
-Repository: REST AND EAT  
-Current website brand: SAVOUR  
-Status: OPEN  
+Approved public-facing brand: REST & EAT
+Natural-language/metadata spelling: Rest & Eat
+Technical repository slug: rest-and-eat
+
+Source implementation:
+- Updated index.html title, description, navigation label, logo and menu eyebrow.
+- HTML entities used for ampersand where appropriate.
+- README and this workflow reflect the approved naming.
+- No repository rename was required.
+
+GitHub implementation commit: 90220ce3612be5fa045ec4d683d6058db83e6bce
+
+Status: IMPLEMENTED — MOBILE VISUAL QA PENDING
 
 Action:
-Confirm final brand before changing UI.
+After Pull, check logo fits at narrow mobile widths, page title and menu eyebrow
+show the new name, and navigation still works. Close issue only after confirmation.
 
 ### ISSUE-002 — INCOMPLETE NAVIGATION DESTINATIONS
 
@@ -335,6 +355,18 @@ Status: PARTIALLY VERIFIED — FIVE CHECKS DEFERRED TO DESKTOP QA
 Action:
 Run all deferred checks on a suitable desktop/browser test setup before release.
 Keep ISSUE-006 OPEN. Do not claim that a deferral equals verification.
+
+### ISSUE-008 — PHASE 4A PROMOTION QA
+
+New featured section is present on main. User reports it looks and works,
+but has not supplied separately recorded portrait, landscape, image cropping,
+contrast, CTA or regression test results.
+
+Status: OPEN — MOBILE QA CHECKLIST PENDING
+
+Action:
+Confirm individual Phase 4A mobile tests before calling it VERIFIED;
+keep desktop release checks open independently.
 
 ### ISSUE-007 — HERO PARALLAX ADVANCED QA
 
@@ -637,6 +669,35 @@ Next:
 - Assistant will update documentation after owner commits and pushes the code.
 - Owner must first Pull this documentation commit into clean SPCK.
 
+### 2026-11-16 — Phase 4A Push and Approved Branding
+
+Owner code push:
+- 0e10f483f05c5dcd9a628ac66f5c4654fbddb57d
+- Commit message: Featured Dish Promotion
+- Files changed: index.html, css/style.css
+- Implemented feature section, background image/overlay, content/price and
+  on-page CTA in HTML; responsive CSS styling added.
+
+Owner functional observation:
+- Reported featured section currently looks and works on the phone.
+- No separate per-test checklist was submitted.
+- QA status: BASIC MOBILE PREVIEW REPORTED OK; DETAILED QA PENDING.
+
+Branding decision:
+- Public brand: REST & EAT (display identity)
+- Metadata and normal prose: Rest & Eat
+- GitHub repository stays BlockJakub/rest-and-eat
+- Previous temporary brand references in active UI were replaced.
+- index.html branding commit: 90220ce3612be5fa045ec4d683d6058db83e6bce
+- New visual mobile QA after Pull: PENDING
+
+Next:
+1. Pull documentation and branding changes in clean SPCK.
+2. Check new branding and Phase 4A layout/CTA.
+3. Continue Phase 4B independently controlled featured image parallax.
+4. Keep Phase 2B/Phase 3 advanced QA and Phase 4A detailed QA open.
+5. No release approval is implied by successful GitHub Push.
+
 ## 8. Required development workflow
 
 ### Before each work session
@@ -675,19 +736,19 @@ Documentation maintenance happens during active chat, not unattended in the back
 
 ## 9. Next authorized development target
 
-**NEXT: PHASE 4A FEATURED DISH PROMOTION**
+**NEXT: BRANDING MOBILE CHECK, THEN PHASE 4B PROMO PARALLAX**
 
 Dependency order:
 
-1. Phase 3 implementation: CONFIRMED on GitHub commit 8e1da7c.
-2. Phase 3 mobile functional QA: PASS 5/5 user-reported groups.
-3. Phase 2B and Phase 3 advanced QA: OPEN, deferred to desktop prior to release.
-4. Owner Pulls the assistant's latest documentation commit into a clean SPCK tree.
-5. Implement static full-bleed featured-dish HTML/CSS after the Bento section.
-6. Test portrait, landscape, cropping, contrast, CTA and existing page regression.
-7. Owner commits and pushes Phase 4A code.
-8. Assistant reviews pushed code, documents actual results and prepares Phase 4B.
-9. No production release without outstanding advanced QA evidence.
+1. Phase 4A implementation: CONFIRMED on GitHub 0e10f48.
+2. Phase 4A owner observation: looks/works in SPCK; detailed QA not recorded.
+3. REST & EAT branding change: COMMITTED on GitHub 90220ce; visual QA PENDING.
+4. Owner Pulls remote branding/documentation commits into clean SPCK.
+5. Confirm mobile logo layout, title/description, menu eyebrow, and navigation.
+6. Complete/record the Phase 4A detailed mobile QA checks.
+7. Implement Phase 4B independent feature-background parallax in a new code batch.
+8. Owner commits and pushes Phase 4B code; assistant reviews and records outcomes.
+9. Phase 2B, Phase 3 and Phase 4 advanced release QA remain OPEN.
 
 Do not silently skip unfinished acceptance tests.
 
