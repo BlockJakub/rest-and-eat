@@ -46,15 +46,19 @@ No JavaScript or CSS framework is currently required.
 - Independent Featured Dish background parallax (Phase 4B; mobile functional QA passed)
 - Updated REST & EAT branding in the home page title, meta description, navigation and menu eyebrow
 - Restaurant Story / About section (Phase 5A) with working #about link and responsive image/text layout
+- Phase 5B Closing, Contact and Footer sections with responsive styling and working #contact anchor
+- Explicit demo-only disclosure: real contact and table reservations are not available
 
 Phase 2B menu animations, Phase 3 Hero Parallax and Phase 4B Featured Dish
 Parallax have passed owner-reported Android functional QA.
 Phase 4A has also been reviewed in SPCK and is implemented on GitHub.
 REST & EAT branding was visually confirmed by the owner after Pull.
-The Phase 5A Restaurant Story has passed five owner-reported Android functional checks;
-image alt/dimensions, desktop and advanced accessibility tests are still outstanding.
-Advanced reduced-motion, cross-browser and measured performance verification remains
-open; see the authoritative workflow tracker.
+Phase 5A Restaurant Story and Phase 5B Closing/Contact/Footer each passed five
+owner-reported Android functional checks. The Contact navigation test was initially
+PENDING and was subsequently reported PASS. Source changes are on GitHub main.
+Image alt/dimensions, desktop accessibility, keyboard, reduced-motion, console,
+cross-browser and measured performance verification remain open; see the workflow tracker.
+The current login.html link still has no destination until Phase 6.
 
 ## Project structure
 
@@ -106,6 +110,7 @@ style.css:
 - Bento Grid
 - Featured-dish promotion layout, overlay and oversized parallax background coverage
 - Restaurant Story mobile-first layout and desktop two-column grid
+- Responsive Closing, Contact and semantic Footer components
 - Animation states
 - Responsive media queries
 
