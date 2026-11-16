@@ -572,3 +572,31 @@ button {
     background-position: center 55%;
   }
 }
+
+
+
+/* ========================================
+   Phase 4B - Featured Dish Parallax
+======================================== */
+
+/*
+ * Extra image coverage allows the background
+ * to move vertically without exposing gaps.
+ *
+ * JavaScript limits translation to +/-64px.
+ */
+.feature__background {
+  inset: -80px 0;
+  transform: translate3d(0, 0, 0);
+}
+
+/*
+ * Restore a static background when the user
+ * requests reduced motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .feature__background {
+    inset: 0;
+    transform: none;
+  }
+}

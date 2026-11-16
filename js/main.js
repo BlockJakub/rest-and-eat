@@ -1,14 +1,12 @@
 
-
-
 import { initNavigation } from './navigation.js';
 
 import {
   initMenuAnimations,
-  initHeroParallax
+  initPageParallax
 } from './animations.js';
 
 // Initialize independent website components.
 initNavigation();
 initMenuAnimations();
-initHeroParallax();
+initPageParallax();
