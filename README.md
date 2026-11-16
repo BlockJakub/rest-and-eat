@@ -34,15 +34,15 @@ No JavaScript or CSS framework is currently required.
 - Semantic HTML foundation
 - Responsive header and navigation
 - Mobile hamburger navigation
-- Full-screen hero with a static background
+- Full-screen hero with scroll-linked parallax background (mobile QA passed)
 - Responsive Bento Grid Menu
 - Three demonstration food cards
 - Menu-card scroll reveal animation
 - Menu-card highlight interaction
 - Reduced-motion CSS support
+- requestAnimationFrame and passive scroll scheduling for Hero Parallax
 
-The animation features are implemented but still require
-the documented Phase 2B quality assurance checks.
+Phase 2B menu animations and Phase 3 Hero Parallax have passed their owner-reported Android functional QA. Advanced accessibility, reduced-motion and performance verification remains pending; see the authoritative workflow tracker.
 
 ## Project structure
 
@@ -85,10 +85,11 @@ animations.js:
 - Menu scroll reveal
 - Menu-card selection
 - DOM-based button creation
+- Hero scroll-linked parallax with requestAnimationFrame and reduced-motion handling
 
 style.css:
 - Base styles and design tokens
-- Header and hero
+- Header, hero and parallax background coverage
 - Bento Grid
 - Animation states
 - Responsive media queries
@@ -161,4 +162,4 @@ document explains the development state and decisions.
 Development project maintained by BlockJakub.
 Current repository visibility: Public.
 
-Last documentation review: 2026-11-15.
+Last documentation review: 2026-11-16.
