@@ -42,20 +42,20 @@ Work cannot continue until a dependency is resolved.
 |---|---|
 | Phase 1 — Foundation | VERIFIED |
 | Phase 2A — Responsive Bento Grid | VERIFIED |
-| Phase 2B — Menu Animations | IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING |
-| Phase 3 — Hero Parallax | TODO |
+| Phase 2B — Menu Animations | IMPLEMENTED — MOBILE QA PASSED; DESKTOP QA DEFERRED |
+| Phase 3 — Hero Parallax | NEXT — READY FOR IMPLEMENTATION |
 | Phase 4 — Featured Dish Promotion | TODO |
 | Phase 5 — Story, Conclusion, Footer | TODO |
 | Phase 6 — Demo Accounts and Dashboard | TODO |
 | Phase 7 — Final QA and Release | TODO |
 
-**Current active phase:** PHASE 2B
+**Current active phase:** PHASE 3 — HERO PARALLAX (NEXT)
 
 **Next dependency:**
-Four Phase 2B mobile functional test groups passed on 2026-11-16.
-Complete or explicitly defer outstanding accessibility, reduced-motion,
-JavaScript-disabled and browser-error checks before Phase 3.
-Do not represent untested checks as passed.
+Four Phase 2B mobile functional groups passed on 2026-11-16.
+Five advanced checks are explicitly DEFERRED TO DESKTOP QA, individually
+documented below. They are NOT PASSED and block final release.
+Proceed with Phase 3 implementation in SPCK, preserving existing features.
 
 ## 4. Implementation roadmap
 
@@ -110,7 +110,7 @@ Git commit:
 
 ### PHASE 2B — Menu Animations
 
-**Status: IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING**
+**Status: IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA DEFERRED TO DESKTOP**
 
 Implemented:
 
@@ -141,16 +141,17 @@ Verification results — owner-reported SPCK Android on 2026-11-16:
 
 Mobile functional result: 4 of 4 tested groups PASS.
 Advanced accessibility / fallback / console checks: NOT YET TESTED.
+Scheduling status: DEFERRED TO DESKTOP QA (not marked PASS).
 Source review confirms stable aria-label and aria-pressed logic, but is not a screen-reader test.
 
 Git commit:
 bdba58a — bento-grid animations
 
-Do not mark the entire phase VERIFIED until outstanding advanced checks are evidenced or explicitly tracked as deferred exceptions. The 4 mobile functional groups have passed.
+Phase 2B remains PARTIALLY VERIFIED, not VERIFIED. Deferred advanced checks are mandatory before production release; they do not constitute a test pass. The owner can continue Phase 3 development while these desktop checks remain open.
 
 ### PHASE 3 — Hero Parallax
 
-**Status: TODO**
+**Status: NEXT — READY FOR IMPLEMENTATION**
 
 Tasks:
 
@@ -305,11 +306,11 @@ Owner-reported SPCK Android functional tests:
 Advanced keyboard, screen reader, reduced-motion,
 JavaScript-disabled and browser-console checks are still untested.
 
-Status: PARTIALLY VERIFIED — ADVANCED QA OPEN
+Status: PARTIALLY VERIFIED — FIVE CHECKS DEFERRED TO DESKTOP QA
 
 Action:
-Complete or formally defer each outstanding test with a reason.
-Do not close this issue based solely on mobile functional PASS results.
+Run all deferred checks on a suitable desktop/browser test setup before release.
+Keep ISSUE-006 OPEN. Do not claim that a deferral equals verification.
 
 ## 6. Architecture decisions
 
@@ -530,6 +531,44 @@ Report advanced test results or record individually justified deferrals
 before advancing to Phase 3. Documentation-only commit follows this audit.
 No README changes needed because architecture/features did not change.
 
+### 2026-11-16 — Advanced QA Deferral and Phase 3 Handoff
+
+Reason for scheduling:
+- Owner is developing in SPCK Editor on Android and requested progress
+  without awkward manual documentation editing on the phone.
+- Four relevant mobile functional groups passed.
+- The remaining tests are most reliably executed with a hardware keyboard,
+  screen reader and desktop browser developer tools.
+
+Formal per-test deferrals (NO TEST PASS CLAIMED):
+1. Keyboard focus and activation — DEFERRED TO DESKTOP QA.
+   Requires Tab, Enter, Space and focus-visible observation with a keyboard.
+2. Screen-reader accessible name/state — DEFERRED TO ACCESSIBILITY QA.
+   Requires TalkBack or equivalent screen reader; aria-pressed must be announced.
+3. prefers-reduced-motion — DEFERRED TO DESKTOP QA.
+   Requires verified media-query emulation or an actual compatible system preference.
+4. JavaScript-disabled fallback — DEFERRED TO DESKTOP QA.
+   Requires loading the page with scripts disabled and inspecting content visibility.
+5. Browser console errors — DEFERRED TO DESKTOP QA.
+   Requires appropriate developer tools to inspect JavaScript errors and failed requests.
+
+No evidence of PASS or FAIL was supplied for these five tests.
+This deferral does not close ISSUE-004 or ISSUE-006.
+Final release remains BLOCKED until advanced tests run and results are recorded.
+
+Phase 3 next implementation batch:
+- Add performant scroll-linked movement to .hero__background.
+- Use requestAnimationFrame with passive scroll/resize scheduling.
+- Clamp movement and avoid background gaps.
+- Preserve the existing hero text, menu animations and navigation.
+- Respect reduced-motion settings.
+- Have owner verify portrait, landscape, CTA and scroll smoothness in SPCK.
+
+Documentation synchronization:
+- Assistant updates tracker directly on GitHub.
+- Owner Pulls the resulting commit with a clean working tree before coding.
+- Owner implements and pushes code before assistant documents actual results.
+
 ## 8. Required development workflow
 
 ### Before each work session
@@ -568,19 +607,17 @@ Documentation maintenance happens during active chat, not unattended in the back
 
 ## 9. Next authorized development target
 
-**NEXT: PHASE 2B ADVANCED QA**
+**NEXT: PHASE 3 HERO PARALLAX IMPLEMENTATION**
 
 Dependency order:
 
-1. Mobile functional QA: PASS (4/4 groups, user report 2026-11-16).
-2. Keyboard focus/activation test: PENDING.
-3. TalkBack/screen-reader accessible-name/state test: PENDING.
-4. prefers-reduced-motion test: PENDING.
-5. JavaScript-disabled content fallback: PENDING.
-6. Browser console errors: PENDING.
-7. Assistant records real test evidence, fixes or explicit deferrals.
-8. Owner Pulls the assistant's documentation commit into a clean SPCK working tree.
-9. Start Phase 3 — Hero Parallax after remaining gates are resolved.
+1. Mobile functional QA for Phase 2B: PASS (4/4 groups).
+2. Five advanced QA checks: DEFERRED TO DESKTOP, not passed; release blockers.
+3. Owner Pulls the documentation-only deferral/handoff commit into clean SPCK.
+4. Owner implements Phase 3 scroll-linked hero movement in SPCK.
+5. Owner runs portrait/landscape, header/CTA and smoothness tests.
+6. Owner commits and pushes code; assistant reviews and records actual results.
+7. Complete Phase 2B deferred QA plus Phase 3 QA before production release.
 
 Do not silently skip unfinished acceptance tests.
 
