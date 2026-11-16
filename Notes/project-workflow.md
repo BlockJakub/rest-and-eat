@@ -12,7 +12,7 @@ Backend: None
 Last audit: 2026-11-16  
 
 Last inspected code/documentation baseline commit:
-d8163c9a01856082e56aeea0f1a669eca7920876
+1c7c22577ca5cb60530679f007d29b2f1ed48cd8
 
 This document is the authoritative source for
 development progress, testing and next actions.
@@ -45,20 +45,19 @@ Work cannot continue until a dependency is resolved.
 | Phase 2B — Menu Animations | IMPLEMENTED — MOBILE QA PASSED; DESKTOP QA DEFERRED |
 | Phase 3 — Hero Parallax | IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING |
 | Phase 4 — Featured Dish Promotion | PHASE 4A+4B IMPLEMENTED — MOBILE QA 5/5 PASS; ADVANCED QA PENDING |
-| Phase 5 — Story, Conclusion, Footer | NEXT — PHASE 5A READY FOR IMPLEMENTATION |
+| Phase 5 — Story, Conclusion, Footer | PHASE 5A IMPLEMENTED — MOBILE QA 5/5 PASS; PHASE 5B NEXT |
 | Phase 6 — Demo Accounts and Dashboard | TODO |
 | Phase 7 — Final QA and Release | TODO |
 
-**Current active phase:** PHASE 5A — RESTAURANT STORY (NEXT)
+**Current active phase:** PHASE 5B — CONCLUSION, CONTACT AND FOOTER (NEXT)
 
 **Next dependency:**
-Phase 4B code commit d8163c9 is confirmed on GitHub main: shared
-initPageParallax() schedules Hero and Featured Dish effects.
-Owner-reported SPCK Android Phase 4B mobile QA: 5/5 functional groups PASS.
-REST & EAT branding display was previously confirmed after Pull.
-Advanced accessibility, reduced-motion emulation, measured performance,
-browser console and production release checks remain OPEN/UNTESTED.
-Proceed to Phase 5A Restaurant Story after Pull of the documentation commit.
+Phase 5A code commit 1c7c225 is confirmed on GitHub main: semantic Restaurant
+Story section, #about anchor and responsive CSS. Owner-reported SPCK Android
+Phase 5A functional QA: 5/5 groups PASS. Source review does not substitute
+for wider desktop/accessibility tests; previous advanced QA remains OPEN.
+Proceed to Phase 5B conclusion, functional #contact anchor and semantic footer
+after pulling the new documentation commits into a clean SPCK working tree.
 
 ## 4. Implementation roadmap
 
@@ -234,14 +233,30 @@ reduced-motion and performance checks are not yet evidenced.
 
 ### PHASE 5 — Story, Conclusion and Footer
 
-**Status: NEXT — PHASE 5A READY FOR IMPLEMENTATION**
+**Status: PHASE 5A IMPLEMENTED — MOBILE QA 5/5 PASS; PHASE 5B NEXT**
 
 Phase 5A — restaurant story:
-- [ ] Create About / Restaurant Story section and meaningful #about destination
-- [ ] Use semantic heading structure and maintain REST & EAT branding
-- [ ] Build mobile-first responsive story layout with appropriately described images
-- [ ] Keep image/restaurant details explicitly demonstrative until confirmed
-- [ ] Test portrait, landscape, navigation and earlier animation regression
+- [x] Create semantic About / Restaurant Story section and #about anchor
+- [x] Add section heading, REST & EAT concept copy and internal #menu link
+- [x] Add provisional img/jidlo3.jpg with figure and figcaption
+- [x] Build mobile-first responsive layout with a two-column desktop media query
+- [x] Keep content explicitly demonstrative ("restaurant concept")
+- [x] Owner-reported SPCK mobile QA: About Navigation — PASS
+- [x] Owner-reported SPCK mobile QA: Portrait Layout — PASS
+- [x] Owner-reported SPCK mobile QA: Landscape Layout — PASS
+- [x] Owner-reported SPCK mobile QA: Menu Link — PASS
+- [x] Owner-reported SPCK mobile QA: Regression — PASS
+- [ ] Verify image alt description against actual photo and confirm image dimensions
+- [ ] Perform desktop/browser, accessibility and console verification before release
+
+Evidence:
+- GitHub code commit: 1c7c22577ca5cb60530679f007d29b2f1ed48cd8
+- Commit message: about section responsive
+- Changed files: index.html and css/style.css
+- Reviewed #about, .story component, responsive media query and internal menu CTA on main.
+- Owner reported Phase 5A mobile QA 5/5 PASS; Notes: None.
+- No independent browser measurements or advanced checks were supplied.
+- Phase 5A is NOT fully production VERIFIED.
 
 Phase 5B — conclusion, contact and footer:
 - [ ] Create conclusion section and honest demo reservation CTA (no fake bookings)
@@ -324,13 +339,19 @@ No automated desktop checks or trademark clearance are implied by closure.
 
 ### ISSUE-002 — INCOMPLETE NAVIGATION DESTINATIONS
 
-The #about, #contact and login.html targets
-are not yet implemented.
+Resolved in Phase 5A:
+- #about now targets the semantic Restaurant Story section.
+- Owner-reported Android navigation test: PASS.
+- Source review confirms the destination exists in index.html.
 
-Status: OPEN
+Still unresolved:
+- #contact: Phase 5B planned.
+- login.html: Phase 6 frontend demonstration planned.
+
+Status: PARTIALLY RESOLVED — #contact AND login.html STILL OPEN
 
 Planned resolution:
-Phases 5 and 6.
+Phases 5B and 6. Do not close this issue until both remaining targets work.
 
 ### ISSUE-003 — DEMONSTRATION MENU CONTENT
 
@@ -420,6 +441,19 @@ Status: OPEN — DESKTOP QA PENDING
 Action:
 Run and document advanced checks prior to release. Do not treat
 mobile visual smoothness as a benchmark result.
+
+### ISSUE-010 — PHASE 5A ADVANCED QA AND IMAGE SEMANTICS
+
+Restaurant Story was implemented and owner-reported mobile tests passed 5/5.
+The provisional photo has an alt description but its content accuracy and
+intrinsic size attributes have not been confirmed against the actual asset.
+Keyboard/accessibility, desktop layout and console checks are still pending.
+
+Status: OPEN — ADVANCED QA NOT TESTED
+
+Action:
+Inspect the photograph and confirm accurate alternative text; verify
+dimensions and cross-device accessibility before production release.
 
 ## 6. Architecture decisions
 
@@ -776,6 +810,42 @@ Next work:
 - Before editing code again, owner Pulls assistant-created documentation commits
   into a clean SPCK working tree.
 
+### 2026-11-16 — Phase 5A Restaurant Story GitHub Verification
+
+Code commit:
+- 1c7c22577ca5cb60530679f007d29b2f1ed48cd8
+- Message: about section responsive
+- Files changed: index.html, css/style.css
+
+Source-level verification:
+- Section id=about resolves formerly broken About navigation target.
+- Section uses aria-labelledby, h2, figure, figcaption and demo copy.
+- Internal CTA links to existing #menu.
+- Responsive CSS contains mobile grid and min-width: 768px two-column layout.
+- No JavaScript changes required; Hero/Bento/Featured behaviour remains in place.
+
+Owner-reported SPCK Android QA:
+1. About Navigation — PASS
+2. Portrait Layout — PASS
+3. Landscape Layout — PASS
+4. Menu Link — PASS
+5. Regression — PASS
+Notes: None.
+
+Assessment:
+- Code confirmed on GitHub main.
+- Phase 5A user-reported mobile QA: 5/5 PASS.
+- ISSUE-002 partially resolved; #contact and login.html are still missing.
+- ISSUE-010 opened for image semantic details and advanced QA.
+- No advanced browser/accessibility performance tests performed.
+- No production release or entire Phase 5 verification claimed.
+
+Next:
+1. Owner pulls assistant documentation commits into a clean SPCK workspace.
+2. Proceed to Phase 5B conclusion, #contact and semantic footer.
+3. Owner tests, commits and pushes Phase 5B; assistant verifies before updating.
+4. Complete all advanced QA before release.
+
 ## 8. Required development workflow
 
 ### Before each work session
@@ -814,20 +884,21 @@ Documentation maintenance happens during active chat, not unattended in the back
 
 ## 9. Next authorized development target
 
-**NEXT: PHASE 5A RESTAURANT STORY**
+**NEXT: PHASE 5B CONCLUSION, CONTACT AND FOOTER**
 
 Dependency order:
 
-1. Phase 4B implementation: CONFIRMED on GitHub d8163c9.
-2. Phase 4B mobile functional QA: PASS (5/5 owner-reported groups).
-3. Phase 2B / Phase 3 / Phase 4 advanced QA remains OPEN before release.
-4. Owner Pulls new assistant documentation commits into clean SPCK.
-5. Implement REST & EAT restaurant story with working #about anchor;
-   use explicit demo content, avoid invented restaurant facts.
-6. Test portrait/landscape, About navigation, CTA and prior animations.
-7. Owner commits/pushes Phase 5A code; assistant verifies GitHub and updates tracker.
-8. Follow with Phase 5B conclusion, #contact and footer.
-9. No production release until advanced QA and all broken links are resolved.
+1. Phase 5A implementation: CONFIRMED on GitHub commit 1c7c225.
+2. Phase 5A mobile functional QA: PASS 5/5 owner-reported groups.
+3. Phase 2B/3/4/5A advanced QA remains OPEN before release.
+4. Owner Pulls assistant documentation changes into clean SPCK.
+5. Add a truthful conclusion and contact section with working #contact target.
+6. Add semantic footer, navigational links and demo-safe contact details.
+7. Keep reservations demonstrative; do not claim functional booking or
+   invent business phone, email, address, operating hours or credentials.
+8. Test responsive layout, contact navigation, links and previous features.
+9. Owner commits and pushes code; assistant verifies before recording results.
+10. Phase 6 frontend-only account demo follows successful Phase 5B tests.
 
 Do not silently skip unfinished acceptance tests.
 
