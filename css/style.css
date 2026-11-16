@@ -445,3 +445,130 @@ button {
     transform: none;
   }
 }
+
+
+
+/* ========================================
+   Phase 4A - Featured Dish Promotion
+======================================== */
+
+.feature {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+
+  min-height: clamp(28rem, 75svh, 46rem);
+  padding: clamp(4rem, 8vw, 7rem) 1.25rem;
+
+  overflow: hidden;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Decorative photographic background */
+.feature__background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.73),
+      rgba(0, 0, 0, 0.68)
+    ),
+    url("../img/jidlo2.jpg");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Content container */
+.feature__container {
+  width: min(100%, 1200px);
+  margin-inline: auto;
+}
+
+.feature__content {
+  width: min(100%, 620px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.feature__eyebrow {
+  margin: 0;
+  color: var(--color-accent);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+}
+
+.feature__title {
+  margin: 1.25rem 0;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 1.1;
+}
+
+.feature__title-accent {
+  display: block;
+  color: var(--color-accent);
+}
+
+.feature__description {
+  max-width: 38rem;
+  margin-inline: auto;
+
+  color: var(--color-text);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.feature__price {
+  margin: 1.5rem 0 0;
+  color: var(--color-accent);
+
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
+
+/* Promotion CTA */
+.feature__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  margin-top: 2rem;
+  padding: 0.9rem 1.8rem;
+
+  background: var(--color-accent);
+  color: var(--color-bg);
+
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0.35rem;
+}
+
+.feature__cta:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+/* Wider screens */
+@media (min-width: 768px) {
+  .feature__content {
+    margin-inline: 0;
+    text-align: left;
+  }
+
+  .feature__description {
+    margin-inline: 0;
+  }
+
+  .feature__background {
+    background-position: center 55%;
+  }
+}
