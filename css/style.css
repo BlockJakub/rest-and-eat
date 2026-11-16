@@ -419,3 +419,29 @@ button {
     transition: none;
   }
 }
+
+
+
+/* ========================================
+   Phase 3 - Full-Bleed Hero Parallax
+======================================== */
+
+/*
+ * Extra background coverage prevents visible
+ * gaps while the image moves vertically.
+ */
+.hero__background {
+  inset: -80px 0;
+  transform: translate3d(0, 0, 0);
+}
+
+/*
+ * Keep the original static background when
+ * the user requests reduced motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .hero__background {
+    inset: 0;
+    transform: none;
+  }
+}

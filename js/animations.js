@@ -154,3 +154,122 @@ function handleCardReveal(entries, observer) {
     observer.unobserve(entry.target);
   }
 }
+
+
+
+/**
+ * Initializes scroll-linked parallax for the Hero.
+ *
+ * Uses requestAnimationFrame to limit visual updates
+ * to browser rendering frames.
+ *
+ * @returns {void} Nothing.
+ */
+export function initHeroParallax() {
+  const hero = document.querySelector('.hero');
+  const background = hero?.querySelector(
+    '.hero__background'
+  );
+
+  if (
+    !hero ||
+    !background ||
+    typeof window.requestAnimationFrame !== 'function' ||
+    typeof window.matchMedia !== 'function'
+  ) {
+    return;
+  }
+
+  const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  );
+
+  let frameRequested = false;
+
+  /**
+   * Updates the background position within safe limits.
+   *
+   * Reading the Hero rectangle once per animation
+   * frame avoids repeated layout calculations.
+   *
+   * @returns {void} Nothing.
+   */
+  function renderParallax() {
+    frameRequested = false;
+
+    if (reducedMotion.matches) {
+      background.style.removeProperty('transform');
+      return;
+    }
+
+    const rect = hero.getBoundingClientRect();
+
+    // No animation work is needed while Hero is offscreen.
+    if (
+      rect.bottom <= 0 ||
+      rect.top >= window.innerHeight
+    ) {
+      return;
+    }
+
+    const offset = Math.min(
+      64,
+      Math.max(0, -rect.top * 0.18)
+    );
+
+    background.style.transform =
+      `translate3d(0, ${offset}px, 0)`;
+  }
+
+  /**
+   * Schedules one rendering update.
+   *
+   * Multiple scroll events share a single animation
+   * frame rather than causing duplicate updates.
+   *
+   * @returns {void} Nothing.
+   */
+  function scheduleParallaxUpdate() {
+    if (frameRequested || reducedMotion.matches) {
+      return;
+    }
+
+    frameRequested = true;
+
+    window.requestAnimationFrame(renderParallax);
+  }
+
+  /**
+   * Reacts to changes in the reduced-motion preference.
+   *
+   * @returns {void} Nothing.
+   */
+  function handleMotionPreferenceChange() {
+    if (reducedMotion.matches) {
+      background.style.removeProperty('transform');
+      return;
+    }
+
+    scheduleParallaxUpdate();
+  }
+
+  window.addEventListener(
+    'scroll',
+    scheduleParallaxUpdate,
+    { passive: true }
+  );
+
+  window.addEventListener(
+    'resize',
+    scheduleParallaxUpdate
+  );
+
+  if (typeof reducedMotion.addEventListener === 'function') {
+    reducedMotion.addEventListener(
+      'change',
+      handleMotionPreferenceChange
+    );
+  }
+
+  scheduleParallaxUpdate();
+}
