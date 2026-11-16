@@ -12,7 +12,7 @@ Backend: None
 Last audit: 2026-11-16  
 
 Last inspected code/documentation baseline commit:
-6040a6b136469d32745fb45e522da29ddc4a9991
+8e1da7c27b2b751621425a7df8bdad532d9db3bd
 
 This document is the authoritative source for
 development progress, testing and next actions.
@@ -43,19 +43,21 @@ Work cannot continue until a dependency is resolved.
 | Phase 1 — Foundation | VERIFIED |
 | Phase 2A — Responsive Bento Grid | VERIFIED |
 | Phase 2B — Menu Animations | IMPLEMENTED — MOBILE QA PASSED; DESKTOP QA DEFERRED |
-| Phase 3 — Hero Parallax | NEXT — READY FOR IMPLEMENTATION |
-| Phase 4 — Featured Dish Promotion | TODO |
+| Phase 3 — Hero Parallax | IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING |
+| Phase 4 — Featured Dish Promotion | NEXT — READY FOR PHASE 4A |
 | Phase 5 — Story, Conclusion, Footer | TODO |
 | Phase 6 — Demo Accounts and Dashboard | TODO |
 | Phase 7 — Final QA and Release | TODO |
 
-**Current active phase:** PHASE 3 — HERO PARALLAX (NEXT)
+**Current active phase:** PHASE 4A — FEATURED DISH PROMOTION LAYOUT (NEXT)
 
 **Next dependency:**
-Four Phase 2B mobile functional groups passed on 2026-11-16.
-Five advanced checks are explicitly DEFERRED TO DESKTOP QA, individually
-documented below. They are NOT PASSED and block final release.
-Proceed with Phase 3 implementation in SPCK, preserving existing features.
+Phase 3 code commit 8e1da7c has been confirmed on GitHub main.
+Owner-reported SPCK Android mobile QA: 5/5 functional groups PASS on 2026-11-16.
+Phase 3 advanced performance/accessibility/reduced-motion checks remain PENDING,
+and Phase 2B deferred desktop QA remains OPEN. No production release is approved.
+Next implementation: Phase 4A featured-dish responsive promotion layout using
+existing local assets before adding independent parallax in Phase 4B.
 
 ## 4. Implementation roadmap
 
@@ -151,31 +153,53 @@ Phase 2B remains PARTIALLY VERIFIED, not VERIFIED. Deferred advanced checks are 
 
 ### PHASE 3 — Hero Parallax
 
-**Status: NEXT — READY FOR IMPLEMENTATION**
+**Status: IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING**
 
-Tasks:
+Implementation verified by remote code inspection:
+- [x] Scroll-linked movement in initHeroParallax() for .hero__background
+- [x] requestAnimationFrame update scheduling with passive scroll event
+- [x] Movement clamped to 0–64px
+- [x] Oversized background coverage (CSS inset: -80px 0)
+- [x] Reduced-motion guard and CSS fallback implemented
+- [x] Existing navigation and Bento interactions preserved in main.js
 
-- [ ] Implement actual scroll-linked hero movement
-- [ ] Use requestAnimationFrame where appropriate
-- [ ] Minimize scroll performance overhead
-- [ ] Clamp background movement
-- [ ] Prevent image gaps during translation
-- [ ] Respect prefers-reduced-motion
-- [ ] Test portrait and landscape
-- [ ] Test performance and text contrast
+Owner-reported SPCK Android mobile QA, 2026-11-16:
+- [x] Hero Parallax: PASS
+- [x] Portrait / Landscape: PASS
+- [x] Text & CTA: PASS
+- [x] Smooth Scrolling: PASS (visual user assessment, not measured FPS)
+- [x] Bento Grid Regression: PASS
+
+Notes: None.
+Code commit: 8e1da7c — hero parallax main.js, animations.js, style.css
+Changed files in commit: css/style.css, index.html, js/animations.js, js/main.js
+
+Advanced QA still OPEN:
+- [ ] Confirm actual reduced-motion behaviour via browser preference/emulation
+- [ ] Check browser console for errors and unsupported browser behaviour
+- [ ] Measure scroll frame performance and stability on desktop
+- [ ] Verify contrast/viewport behaviour at wider desktop breakpoints
+- [ ] Confirm accessibility with keyboard and assistive technology where applicable
+
+The full phase is NOT marked VERIFIED or production-ready; mobile functional
+tests passed but advanced checks lack test evidence.
 
 ### PHASE 4 — Featured Dish Promotion
 
-**Status: TODO**
+**Status: NEXT — READY FOR PHASE 4A**
 
-Tasks:
+Phase 4A — responsive static promotion:
+- [ ] Add full-bleed promotional section below Bento menu
+- [ ] Use an existing repository image as provisional content (avoid new assets)
+- [ ] Add matching demonstration dish title, description and price
+- [ ] Add meaningful CTA leading to the existing #menu anchor
+- [ ] Preserve semantic HTML and readable overlay contrast
+- [ ] Test portrait/landscape and responsive cropping in SPCK
 
-- [ ] Add full-bleed promotional section
-- [ ] Add featured food photograph
-- [ ] Add dish title, description and price
-- [ ] Add meaningful CTA destination
-- [ ] Add independently controlled parallax
-- [ ] Test responsive cropping and contrast
+Phase 4B — independent promotion motion:
+- [ ] Add separately controlled promotion parallax without duplicating Hero observers
+- [ ] Respect prefers-reduced-motion, avoid image gaps and unnecessary scroll work
+- [ ] Test motion, stability, link behaviour and Bento/Hero regression
 
 ### PHASE 5 — Story, Conclusion and Footer
 
@@ -311,6 +335,18 @@ Status: PARTIALLY VERIFIED — FIVE CHECKS DEFERRED TO DESKTOP QA
 Action:
 Run all deferred checks on a suitable desktop/browser test setup before release.
 Keep ISSUE-006 OPEN. Do not claim that a deferral equals verification.
+
+### ISSUE-007 — HERO PARALLAX ADVANCED QA
+
+Implementation and five mobile functional test groups passed on 2026-11-16.
+Measured frame-rate performance, reduced-motion emulation, desktop
+responsive contrast and browser console have NOT been verified.
+
+Status: OPEN — DESKTOP QA PENDING
+
+Action:
+Run and document advanced checks prior to release. Do not treat
+mobile visual smoothness as a benchmark result.
 
 ## 6. Architecture decisions
 
@@ -569,6 +605,38 @@ Documentation synchronization:
 - Owner Pulls the resulting commit with a clean working tree before coding.
 - Owner implements and pushes code before assistant documents actual results.
 
+### 2026-11-16 — Phase 3 Hero Parallax Code and Mobile QA
+
+Remote code verification:
+- Commit 8e1da7c27b2b751621425a7df8bdad532d9db3bd found on main.
+- Reviewed js/animations.js, js/main.js, css/style.css and index.html.
+- Hero parallax uses requestAnimationFrame, passive scroll, a movement clamp,
+  enlarged background coverage and reduced-motion logic.
+- Commit includes a minor HTML title-case change; this is not a brand approval.
+
+User-reported SPCK Android mobile QA:
+1. Hero Parallax — PASS
+2. Portrait / Landscape — PASS
+3. Text & CTA — PASS
+4. Smooth Scrolling — PASS
+5. Bento Grid Regression — PASS
+Notes: None.
+
+Assessment:
+- GitHub implementation: CONFIRMED.
+- Functional mobile QA: PASS 5/5 user-reported groups.
+- Advanced performance, reduced-motion, desktop accessibility and
+  browser console QA: PENDING, no unperformed test marked PASS.
+- ISSUE-007 OPEN, and Phase 2B advanced checks remain OPEN.
+- Phase 3 not approved for production release.
+
+Next:
+- Phase 4A: responsive static featured-dish promotion after existing menu.
+- Use provisional image and dish content until real assets are provided.
+- Phase 4B: independent parallax only after Phase 4A visual tests pass.
+- Assistant will update documentation after owner commits and pushes the code.
+- Owner must first Pull this documentation commit into clean SPCK.
+
 ## 8. Required development workflow
 
 ### Before each work session
@@ -607,17 +675,19 @@ Documentation maintenance happens during active chat, not unattended in the back
 
 ## 9. Next authorized development target
 
-**NEXT: PHASE 3 HERO PARALLAX IMPLEMENTATION**
+**NEXT: PHASE 4A FEATURED DISH PROMOTION**
 
 Dependency order:
 
-1. Mobile functional QA for Phase 2B: PASS (4/4 groups).
-2. Five advanced QA checks: DEFERRED TO DESKTOP, not passed; release blockers.
-3. Owner Pulls the documentation-only deferral/handoff commit into clean SPCK.
-4. Owner implements Phase 3 scroll-linked hero movement in SPCK.
-5. Owner runs portrait/landscape, header/CTA and smoothness tests.
-6. Owner commits and pushes code; assistant reviews and records actual results.
-7. Complete Phase 2B deferred QA plus Phase 3 QA before production release.
+1. Phase 3 implementation: CONFIRMED on GitHub commit 8e1da7c.
+2. Phase 3 mobile functional QA: PASS 5/5 user-reported groups.
+3. Phase 2B and Phase 3 advanced QA: OPEN, deferred to desktop prior to release.
+4. Owner Pulls the assistant's latest documentation commit into a clean SPCK tree.
+5. Implement static full-bleed featured-dish HTML/CSS after the Bento section.
+6. Test portrait, landscape, cropping, contrast, CTA and existing page regression.
+7. Owner commits and pushes Phase 4A code.
+8. Assistant reviews pushed code, documents actual results and prepares Phase 4B.
+9. No production release without outstanding advanced QA evidence.
 
 Do not silently skip unfinished acceptance tests.
 
