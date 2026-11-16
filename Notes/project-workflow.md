@@ -9,10 +9,10 @@ Branch: main
 Editor: SPCK Editor (Android)  
 Stack: HTML5 / BEM CSS / Vanilla JavaScript  
 Backend: None  
-Last audit: 2026-11-15  
+Last audit: 2026-11-16  
 
 Last inspected code/documentation baseline commit:
-21bf1605660b812fec2cda5354fc785c33246d37
+6040a6b136469d32745fb45e522da29ddc4a9991
 
 This document is the authoritative source for
 development progress, testing and next actions.
@@ -42,7 +42,7 @@ Work cannot continue until a dependency is resolved.
 |---|---|
 | Phase 1 — Foundation | VERIFIED |
 | Phase 2A — Responsive Bento Grid | VERIFIED |
-| Phase 2B — Menu Animations | IMPLEMENTED |
+| Phase 2B — Menu Animations | IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING |
 | Phase 3 — Hero Parallax | TODO |
 | Phase 4 — Featured Dish Promotion | TODO |
 | Phase 5 — Story, Conclusion, Footer | TODO |
@@ -52,8 +52,10 @@ Work cannot continue until a dependency is resolved.
 **Current active phase:** PHASE 2B
 
 **Next dependency:**
-Complete Phase 2B verification and resolve any
-confirmed issues before starting Phase 3.
+Four Phase 2B mobile functional test groups passed on 2026-11-16.
+Complete or explicitly defer outstanding accessibility, reduced-motion,
+JavaScript-disabled and browser-error checks before Phase 3.
+Do not represent untested checks as passed.
 
 ## 4. Implementation roadmap
 
@@ -108,7 +110,7 @@ Git commit:
 
 ### PHASE 2B — Menu Animations
 
-**Status: IMPLEMENTED — QA PENDING**
+**Status: IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING**
 
 Implemented:
 
@@ -121,26 +123,30 @@ Implemented:
 - [x] Reduced-motion CSS styles
 - [x] JSDoc documentation
 
-Verification still required:
+Verification results — owner-reported SPCK Android on 2026-11-16:
 
-- [ ] Scroll reveal works correctly
-- [ ] Cards reveal once
-- [ ] Highlight button works
-- [ ] Second click cancels selection
-- [ ] Selecting another card clears previous state
-- [ ] Portrait layout remains functional
-- [ ] Landscape layout remains functional
-- [ ] Navigation and hero remain functional
-- [ ] Keyboard activation works
-- [ ] Accessible button naming is correct
-- [ ] Reduced-motion behaviour passes
-- [ ] Content remains visible without JavaScript
-- [ ] No unexpected browser errors
+- [x] Scroll reveal works correctly (mobile QA group 1: PASS)
+- [x] Cards reveal once; no repeated reveal on scrolling (group 1: PASS)
+- [x] Highlight button works (group 2: PASS)
+- [x] Second click cancels selection (group 2: PASS)
+- [x] Selecting another card clears previous state (group 2: PASS)
+- [x] Portrait layout remains functional (group 3: PASS)
+- [x] Landscape layout remains functional (group 3: PASS)
+- [x] Navigation and hero remain functional (group 4: PASS)
+- [ ] Keyboard activation and focus-visible indication work with Tab, Enter and Space
+- [ ] Accessible button naming and pressed state are announced correctly in TalkBack or a screen reader
+- [ ] Reduced-motion behaviour passes with the actual prefers-reduced-motion media query enabled
+- [ ] Content remains visible with JavaScript disabled
+- [ ] Browser console shows no unexpected errors (not covered by reported functional tests)
+
+Mobile functional result: 4 of 4 tested groups PASS.
+Advanced accessibility / fallback / console checks: NOT YET TESTED.
+Source review confirms stable aria-label and aria-pressed logic, but is not a screen-reader test.
 
 Git commit:
 bdba58a — bento-grid animations
 
-Do not mark this phase VERIFIED yet.
+Do not mark the entire phase VERIFIED until outstanding advanced checks are evidenced or explicitly tracked as deferred exceptions. The 4 mobile functional groups have passed.
 
 ### PHASE 3 — Hero Parallax
 
@@ -289,13 +295,21 @@ Confirm whether public visibility is intended.
 
 ### ISSUE-006 — ANIMATION VERIFICATION
 
-Phase 2B code is pushed, but complete QA evidence
-has not been supplied.
+Owner-reported SPCK Android functional tests:
+- Scroll reveal: PASS
+- Click/tap highlight: PASS
+- Responsive portrait/landscape: PASS
+- Header/hero regression: PASS
+- Notes: None
 
-Status: OPEN
+Advanced keyboard, screen reader, reduced-motion,
+JavaScript-disabled and browser-console checks are still untested.
+
+Status: PARTIALLY VERIFIED — ADVANCED QA OPEN
 
 Action:
-Run Phase 2B acceptance tests.
+Complete or formally defer each outstanding test with a reason.
+Do not close this issue based solely on mobile functional PASS results.
 
 ## 6. Architecture decisions
 
@@ -477,6 +491,45 @@ Next:
 2. Perform Phase 2B acceptance testing.
 3. Report results, then proceed to Phase 3 only after verification.
 
+### 2026-11-16 — Phase 2B Mobile Functional QA
+
+Evidence:
+User submitted results from SPCK Preview on Android.
+No screenshots or independent browser instrumentation were supplied for this batch.
+Source reviewed: js/animations.js and css/style.css at GitHub main.
+Baseline before documentation update: 6040a6b.
+
+Owner-reported tests:
+1. Scroll Reveal — PASS
+   Expected: cards reveal on entry and do not replay after revisiting.
+2. Click / Tap Highlight — PASS
+   Expected: select, deselect, switch selected card.
+3. Responsive Portrait / Landscape — PASS
+   Expected: cards and controls remain usable with no layout overflow.
+4. Regression Header / Hero — PASS
+   Expected: hamburger and hero CTA still function.
+
+User notes: None.
+
+Assessment:
+- Functional mobile QA groups passed: 4/4.
+- No code changes required based on the reported tests.
+- Phase 2B stays IMPLEMENTED with MOBILE QA PASSED / ADVANCED QA PENDING.
+- ISSUE-006 remains open for unperformed advanced tests.
+- ISSUE-004 remains IMPLEMENTED — QA PENDING until screen-reader/keyboard verification.
+
+Outstanding test actions:
+- Keyboard: Tab to each Highlight dish button; check visible focus, Enter and Space toggle, and only one selected card.
+- Screen reader: Android TalkBack announces correct dish-specific button name, button role and pressed/not-pressed state.
+- Reduced motion: emulate prefers-reduced-motion: reduce, reload; all cards remain visible without reveal or translate animations.
+- No JavaScript: disable scripts in a browser test, reload; all menu images, text and prices remain visible without enhancement buttons.
+- Console: check for JavaScript errors and failed assets, preferably with desktop developer tools.
+
+Next dependency:
+Report advanced test results or record individually justified deferrals
+before advancing to Phase 3. Documentation-only commit follows this audit.
+No README changes needed because architecture/features did not change.
+
 ## 8. Required development workflow
 
 ### Before each work session
@@ -515,16 +568,19 @@ Documentation maintenance happens during active chat, not unattended in the back
 
 ## 9. Next authorized development target
 
-**NEXT: PHASE 2B VERIFICATION**
+**NEXT: PHASE 2B ADVANCED QA**
 
 Dependency order:
 
-1. Test existing animations in SPCK.
-2. Fix confirmed interaction/accessibility issues.
-3. Owner commits and pushes code after testing.
-4. Assistant updates QA results and remaining work directly on GitHub.
-5. Owner pulls the documentation changes into SPCK.
-6. Begin Phase 3 — Hero Parallax after required checks pass.
+1. Mobile functional QA: PASS (4/4 groups, user report 2026-11-16).
+2. Keyboard focus/activation test: PENDING.
+3. TalkBack/screen-reader accessible-name/state test: PENDING.
+4. prefers-reduced-motion test: PENDING.
+5. JavaScript-disabled content fallback: PENDING.
+6. Browser console errors: PENDING.
+7. Assistant records real test evidence, fixes or explicit deferrals.
+8. Owner Pulls the assistant's documentation commit into a clean SPCK working tree.
+9. Start Phase 3 — Hero Parallax after remaining gates are resolved.
 
 Do not silently skip unfinished acceptance tests.
 
