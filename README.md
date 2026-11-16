@@ -41,15 +41,17 @@ No JavaScript or CSS framework is currently required.
 - Menu-card scroll reveal animation
 - Menu-card highlight interaction
 - Reduced-motion CSS support
-- requestAnimationFrame and passive scroll scheduling for Hero Parallax
+- A shared requestAnimationFrame scheduler and passive scroll listener for independent Hero and Featured Dish parallax
 - Featured Dish Promotion (Phase 4A) with responsive image, demonstration price and menu CTA
+- Independent Featured Dish background parallax (Phase 4B; mobile functional QA passed)
 - Updated REST & EAT branding in the home page title, meta description, navigation and menu eyebrow
 
-Phase 2B menu animations and Phase 3 Hero Parallax have passed owner-reported Android functional QA.
-The Phase 4A promotion is implemented and the owner reports that it looks and works in SPCK;
-specific responsive, contrast and regression checks have not yet been reported separately.
-The REST & EAT branding update is committed, but visual verification after Pull is pending.
-Advanced accessibility, reduced-motion and performance QA remains open; see the workflow tracker.
+Phase 2B menu animations, Phase 3 Hero Parallax and Phase 4B Featured Dish
+Parallax have passed owner-reported Android functional QA.
+Phase 4A has also been reviewed in SPCK and is implemented on GitHub.
+REST & EAT branding was visually confirmed by the owner after Pull.
+Advanced accessibility, reduced-motion, cross-browser and measured performance
+verification remains open; see the authoritative workflow tracker.
 
 ## Project structure
 
@@ -92,13 +94,14 @@ animations.js:
 - Menu scroll reveal
 - Menu-card selection
 - DOM-based button creation
-- Hero scroll-linked parallax with requestAnimationFrame and reduced-motion handling
+- Shared initPageParallax() with one passive scroll listener and requestAnimationFrame scheduling
+- Independent Hero and Featured Dish motion parameters, clamp limits and reduced-motion handling
 
 style.css:
 - Base styles and design tokens
 - Header, hero and parallax background coverage
 - Bento Grid
-- Featured-dish promotion layout and overlay
+- Featured-dish promotion layout, overlay and oversized parallax background coverage
 - Animation states
 - Responsive media queries
 
