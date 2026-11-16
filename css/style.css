@@ -743,3 +743,270 @@ button {
     max-height: 35rem;
   }
 }
+
+
+
+/* ========================================
+   Phase 5B - Closing Section
+======================================== */
+
+.closing {
+  padding: clamp(5rem, 10vw, 9rem) 1.25rem;
+  background: linear-gradient(
+    180deg,
+    #181511,
+    var(--color-bg)
+  );
+  text-align: center;
+}
+
+.closing__container {
+  width: min(100%, 800px);
+  margin-inline: auto;
+}
+
+.closing__eyebrow {
+  margin: 0 0 1.5rem;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+}
+
+.closing__title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.25rem, 7vw, 4.75rem);
+  line-height: 1.15;
+}
+
+.closing__title-accent {
+  display: block;
+  color: var(--color-accent);
+}
+
+.closing__description {
+  max-width: 580px;
+  margin: 0 auto;
+  color: #d3c9bd;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.closing__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.closing__cta,
+.closing__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.closing__cta {
+  padding: 0.9rem 1.75rem;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-radius: 0.35rem;
+}
+
+.closing__link {
+  padding: 0.6rem 0;
+  color: var(--color-accent);
+  border-bottom: 2px solid currentColor;
+}
+
+.closing__cta:focus-visible,
+.closing__link:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 5px;
+}
+
+/* ========================================
+   Phase 5B - Contact Section
+======================================== */
+
+.contact {
+  padding: clamp(4rem, 8vw, 7rem) 1.25rem;
+  background: #181511;
+}
+
+.contact__container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+
+  width: min(100%, 1200px);
+  margin-inline: auto;
+}
+
+.contact__content {
+  min-width: 0;
+}
+
+.contact__eyebrow {
+  margin: 0 0 1rem;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+}
+
+.contact__title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 1.15;
+}
+
+.contact__title-accent {
+  display: block;
+  color: var(--color-accent);
+}
+
+.contact__description {
+  max-width: 35rem;
+  margin: 0;
+  color: #d3c9bd;
+  line-height: 1.8;
+}
+
+.contact__panel {
+  min-width: 0;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid #514537;
+  border-radius: 1rem;
+  background: #211d19;
+}
+
+.contact__panel-title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  line-height: 1.3;
+}
+
+.contact__panel-text {
+  margin: 0;
+  color: #d3c9bd;
+  line-height: 1.8;
+}
+
+.contact__notice {
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid #514537;
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+/* ========================================
+   Phase 5B - Site Footer
+======================================== */
+
+.site-footer {
+  padding: 3rem 1.25rem 1.5rem;
+  border-top: 1px solid #39332c;
+  background: var(--color-bg);
+}
+
+.site-footer__container {
+  display: grid;
+  gap: 2rem;
+  width: min(100%, 1200px);
+  margin-inline: auto;
+}
+
+.site-footer__logo {
+  display: inline-block;
+  color: var(--color-text);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.site-footer__logo-accent {
+  color: var(--color-accent);
+}
+
+.site-footer__tagline {
+  margin: 0.75rem 0 0;
+  color: #c7beb0;
+  line-height: 1.6;
+}
+
+.site-footer__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-footer__link:hover {
+  color: var(--color-accent);
+}
+
+.site-footer__logo:focus-visible,
+.site-footer__link:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 5px;
+}
+
+.site-footer__disclaimer {
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid #39332c;
+  color: #bdb7ac;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* ========================================
+   Phase 5B - Responsive Layout
+======================================== */
+
+@media (min-width: 768px) {
+  .contact__container {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+  }
+
+  .site-footer__container {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .site-footer__nav {
+    justify-self: end;
+  }
+
+  .site-footer__disclaimer {
+    grid-column: 1 / -1;
+  }
+}
