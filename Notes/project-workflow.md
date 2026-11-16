@@ -46,19 +46,20 @@ Work cannot continue until a dependency is resolved.
 | Phase 3 — Hero Parallax | IMPLEMENTED — MOBILE QA PASSED; ADVANCED QA PENDING |
 | Phase 4 — Featured Dish Promotion | PHASE 4A+4B IMPLEMENTED — MOBILE QA 5/5 PASS; ADVANCED QA PENDING |
 | Phase 5 — Story, Conclusion, Footer | PHASE 5A+5B IMPLEMENTED — MOBILE QA 5/5 PASS EACH; ADVANCED QA PENDING |
-| Phase 6 — Demo Accounts and Dashboard | NEXT — PHASE 6A READY FOR IMPLEMENTATION |
+| Phase 6 — Real Customer Accounts & Ordering | ARCHITECTURE PROPOSED — AUTH-00 REQUIREMENTS/HOSTING GATE NEXT |
 | Phase 7 — Final QA and Release | TODO |
 
-**Current active phase:** PHASE 6A — FRONTEND DEMO ACCOUNTS (NEXT)
+**Current active phase:** AUTH-00 — REAL AUTHENTICATION & ORDERING REQUIREMENTS/HOSTING GATE (NEXT)
 
 **Next dependency:**
-Phase 5B code commit 6fc93c8 is confirmed on GitHub main: closing section,
-working #contact target and semantic footer with responsive styling.
-Owner-reported Phase 5B SPCK Mobile QA: 5/5 PASS (Contact Navigation included).
-The site remains a frontend concept: contact and reservations are not live.
-Phase 6A frontend-only account demonstration is NEXT after owner pulls docs.
-All unperformed advanced desktop/accessibility/reduced-motion/performance
-and browser console checks remain OPEN and block production release.
+Owner clarified that Phase 6 must become a real, secure, reusable customer
+authentication and food ordering system — NOT a fake frontend-only login.
+Specification drafted at Notes/auth-and-order-system-plan.md (PROPOSED).
+Recommended stack: vanilla JS frontend modules + Node.js server + isolated MariaDB;
+hosting, mail, order fulfilment and deployment support remain UNCONFIRMED.
+NEXT: AUTH-00 requirements and hosting gate. Do not collect real credentials
+before the trusted server and security controls exist. All unperformed advanced
+desktop/accessibility/reduced-motion/performance and browser-console QA remains OPEN.
 
 ## 4. Implementation roadmap
 
@@ -283,30 +284,42 @@ Phase 5B GitHub and test evidence:
 - SPCK Android functional groups: 5/5 PASS; Notes: None.
 - Advanced QA not run; do not mark Phase 5 fully VERIFIED or production-ready.
 
-### PHASE 6 — Frontend Account Demonstration
+### PHASE 6 — Real Customer Authentication and Food Ordering
 
-**Status: NEXT — PHASE 6A READY FOR IMPLEMENTATION**
+**Status: NEW SCOPE REQUESTED — ARCHITECTURE PROPOSED, NOT IMPLEMENTED**
 
-Tasks:
+The owner requires a **real, secure, reusable** account system and customer
+food ordering, not frontend-only demo authentication. The previous static
+`auth-demo.js` / client-only session plan is SUPERSEDED and must not be implemented
+as a substitute for server-side security.
 
-- [ ] Create login.html
-- [ ] Create register.html
-- [ ] Create dashboard.html
-- [ ] Create auth-demo.js
-- [ ] Add accessible form validation
-- [ ] Add demonstration session state
-- [ ] Add dashboard welcome state
-- [ ] Add sample favourites/activity
-- [ ] Add demo logout
-- [ ] Label the system as frontend-only
+Authoritative proposed specification:
+`Notes/auth-and-order-system-plan.md`
+Document status: PROPOSED — OWNER REVIEW REQUIRED.
 
-Security requirements:
+Delivery dependencies:
+- [ ] AUTH-00 — confirm Node-compatible hosting, HTTPS, database, email,
+      operator receipt of orders, collection/delivery/payment policies and
+      maintenance responsibilities; approve final architecture and privacy scope
+- [ ] AUTH-01 — semantic reusable BEM Login/Register/Reset/Dashboard UI shells,
+      modular JS components and accessible states; no real credentials yet
+- [ ] AUTH-02 — Node.js backend, isolated database and secure API foundation
+- [ ] AUTH-03 — registration, email verification, secure server-side sessions,
+      login and logout, tested with real authorization boundaries
+- [ ] AUTH-04 — forgot/reset password, password change, profile/deletion
+- [ ] AUTH-05 — server-priced menu, cart, transactionally placed orders,
+      restaurant notification process and own order history
+- [ ] AUTH-06 — integrated Dashboard, comprehensive security tests and
+      packaging of audited reusable components for future projects
 
-- Never claim this is secure authentication.
-- Never store real passwords in browser storage.
-- Never collect real account credentials.
-- Do not present frontend redirects as access control.
-- Any real authentication requires a separate backend.
+Non-negotiable:
+- Client-side JavaScript is not an authentication/security boundary.
+- No plaintext passwords, localStorage tokens presented as secure logins,
+  arbitrary order prices, or unprotected order/user API endpoints.
+- No real registration or login capture until backend and deployment gates pass.
+- Keep all current responsive website features working.
+- Phase 7 production QA remains required. Do not mark Phase 6 complete
+  merely because HTML forms exist.
 
 ### PHASE 7 — Final QA and Release
 
@@ -519,15 +532,29 @@ Use transform-based visual animations.
 
 Respect prefers-reduced-motion.
 
-### DECISION-007
+### DECISION-007 — SUPERSEDED (2026-11-16)
 
-Use static frontend demo accounts only.
-Real authentication is outside the current scope.
+Previous proposal: use static frontend demo accounts only and exclude
+real authentication. This direction was explicitly rejected by the owner
+for the target project. It was not implemented.
+
+New proposed direction: secure backend authentication and real ordering.
+Final backend/hosting decisions require AUTH-00 approval.
 
 ### DECISION-008
 
-Use normal CSS in SPCK Editor.
-SCSS compilation is not currently required.
+Use normal CSS in SPCK Editor for the existing static website.
+SCSS compilation is not currently required; future reusable components
+may be extracted into SCSS packages without rewriting working views.
+
+### DECISION-009 — REAL AUTHENTICATION PLAN PROPOSED
+
+Keep semantic, mobile-first BEM UI and ES modules reusable across projects.
+Proposed backend: Node.js + Express, a separate MariaDB database,
+server-side sessions and transactional order APIs.
+Reference: Notes/auth-and-order-system-plan.md.
+Status: PROPOSAL; Node-compatible hosting and restaurant operation
+requirements are unverified. No production security claims until tested.
 
 ## 7. Work session history
 
@@ -917,6 +944,31 @@ Next:
 - Begin Phase 6A frontend-only account demonstration with no real
   authentication, passwords, backend, personal data or false security claims.
 
+### 2026-11-16 — Phase 6 Scope Correction and Architecture Proposal
+
+Owner correction:
+- A frontend-only demonstration account system is NOT the intended outcome.
+- Required deliverable is a real reusable registration/login/logout/reset
+  password flow and a customer Dashboard able to place food orders.
+- Existing responsive/BEM components and JS modules should be designed
+  for extraction and reuse in later client projects.
+
+Actions:
+- Created Notes/auth-and-order-system-plan.md as proposed architecture plan.
+- Separated client-side UI from trusted server-side auth and order processing.
+- Proposed Node.js + Express + isolated MariaDB, subject to hosting gate.
+- Identified necessary account verification, session lifecycle, data protection,
+  notifications, transactional orders and testing dependencies.
+- Superseded old client-only demo direction; NO feature code or auth backend
+  has been created in this documentation batch.
+- Do not capture actual credentials before API/backend deployment is approved.
+
+Next:
+- AUTH-00: agree hosting, minimal restaurant order delivery/pickup and
+  fulfilment requirements, selected server/database/email setup.
+- Then implement small, tested, reusable slices rather than bulk code.
+- Owner must Pull documentation commits into clean SPCK before coding.
+
 ## 8. Required development workflow
 
 ### Before each work session
@@ -955,22 +1007,22 @@ Documentation maintenance happens during active chat, not unattended in the back
 
 ## 9. Next authorized development target
 
-**NEXT: PHASE 6A FRONTEND ACCOUNT DEMONSTRATION**
+**NEXT: AUTH-00 REAL AUTHENTICATION AND ORDERING DESIGN GATE**
 
 Dependency order:
 
-1. Phase 5B commit: CONFIRMED on GitHub 6fc93c8.
-2. Phase 5B SPCK Android functional QA: PASS 5/5 owner-reported groups.
-3. Phase 2B, 3, 4, 5A and 5B advanced QA remains OPEN before release.
-4. Owner Pulls new documentation commits into clean SPCK.
-5. Phase 6A implements safe static login/register/dashboard demonstration
-   routes and honest demo-only labels; login.html is the next missing target.
-6. Do not collect real credentials or personal data, save passwords,
-   pretend client-side redirects enforce authorization or add fake backend logic.
-7. Test new pages, links and responsive layouts in SPCK, then commit/push.
-8. Assistant verifies actual GitHub code before recording 6A test results.
-9. Complete Phase 6 subsequent frontend interaction batches and all Phase 7 QA
-   before considering release.
+1. Existing website through Phase 5B: implemented; mobile functional QA passed.
+2. Existing advanced QA for Phases 2B/3/4/5 remains OPEN before any release.
+3. Owner now requests real secure auth and food ordering, not fake frontend sessions.
+4. Read Notes/auth-and-order-system-plan.md; architecture is a PROPOSAL.
+5. Resolve hosting capability, HTTPS, isolated MariaDB, email transport,
+   operator notification/confirmation and collection/delivery/payment rules.
+6. Approve final architecture and constraints; do not prematurely implement
+   unauthenticated browser-only "login" as real authentication.
+7. Then implement reusable, responsive client components and secure server API
+   in small phases, test and commit each dependency before the next.
+8. All real security and end-to-end order tests must pass before production.
+9. Owner Pulls these documentation changes into clean SPCK when ready.
 
 Do not silently skip unfinished acceptance tests.
 
